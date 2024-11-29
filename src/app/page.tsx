@@ -1,10 +1,11 @@
 "use client";
+
 import Card from "@/components/Card";
-import BlockInput from "@/components/Forms/BlockInput";
 import useAlg from "@/hooks/useAlg";
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 
 export default function Home() {
+  const tabSection = useRef<HTMLDivElement>(null);
   const [val, setVal] = useState("");
   const { oddEvenPattern, EvenOddPattern } = useAlg();
   const [OE, setOE] = useState([]);
@@ -15,7 +16,7 @@ export default function Home() {
     if (val) {
       setOE(oddEvenPattern(OE, val));
       setEO(EvenOddPattern(EO, val));
-      setVal((prv) => "");
+      setVal("");
     }
   };
 
@@ -28,38 +29,25 @@ export default function Home() {
       array[array.length - 1] = temp;
     }
 
-    changeState(JSON.parse(JSON.stringify(array)));
+    changeState([...array]); // Ensure re-render
   };
 
+  useEffect(() => {
+    console.log({ fire: "fire" });
+    tabSection.current?.scrollIntoView({ behavior: "smooth" });
+  }, [val]);
+
   return (
-    <section className="container p-6 mx-auto space-y-3  bg-white">
-      <h4 className="text-xl font-bold text-[#9F0D0F] capitalize  md:text-3xl text-center">
-        💲 Casino speed roulette 💲
-      </h4>
+    <div className="flex flex-col h-screen bg-white">
+      <header className="p-6 bg-white shadow">
+        <h4 className="text-xl font-bold text-[#9F0D0F] capitalize md:text-3xl text-center">
+          💲 Casino speed roulette 💲
+        </h4>
+      </header>
 
-      <form onSubmit={valueEnter}>
-        <div className="flex border-2  border-blue-500 overflow-hidden max-w-md mx-auto  mt-6">
-          <input
-            type="number"
-            placeholder="0"
-            className="w-full outline-none bg-white text-gray-600 text-sm px-4 py-3"
-            value={val}
-            onChange={(e) => {
-              setVal(e.target.value);
-            }}
-          />
-          <button
-            onClick={valueEnter}
-            type="submit"
-            className="flex items-center justify-center bg-[#007bff] px-5 text-sm text-white"
-          >
-            SUBMIT
-          </button>
-        </div>
-      </form>
-
-      <div className="flex items-center justify-center">
-        <div className="grid gap-8 my-8 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+      {/* Scrollable Grid Section */}
+      <main className="flex-1 overflow-y-auto p-6">
+        <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
           <Card
             title={"ODD-EVEN"}
             record={OE}
@@ -77,7 +65,34 @@ export default function Home() {
             }}
           />
         </div>
-      </div>
-    </section>
+        <div ref={tabSection} className="h-1 w-full bg-transparent" />
+      </main>
+
+      {/* Sticky Footer Form */}
+      <footer className="sticky bottom-0 bg-white p-4 border-t shadow-md">
+        <form
+          onSubmit={valueEnter}
+          className="flex max-w-md mx-auto border-2 border-blue-500 overflow-hidden"
+        >
+          <input
+            type="text"
+            placeholder="Enter the Numbers"
+            className="w-full outline-none bg-white text-gray-600 text-sm px-4 py-3 appearance-none"
+            value={val}
+            onChange={(e: any) => {
+              if (!isNaN(e.target.value)) {
+                setVal(e.target.value);
+              }
+            }}
+          />
+          <button
+            type="submit"
+            className="flex items-center justify-center bg-[#007bff] px-5 text-sm text-white"
+          >
+            SUBMIT
+          </button>
+        </form>
+      </footer>
+    </div>
   );
 }

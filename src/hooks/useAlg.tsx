@@ -26,8 +26,7 @@ const useAlg = () => {
 
   const oddEvenPattern = (prevOddEven: any, value: any) => {
     let OE: any = prevOddEven;
-    console.log({ value });
-    console.log(!OE.length);
+
     if (!OE.length) {
       if (oddOrEven(value).type == "odd") {
         OE.push([value]);
@@ -43,7 +42,6 @@ const useAlg = () => {
 
       let lastSubArray = [OE[OE.length - 1]];
       lastSubArray.map((arrayChunk, index) => {
-        // console.log({ arrayChunk: arrayChunk.length });
         if (arrayChunk.length === 1) {
           temp = {
             type: "current",
@@ -72,7 +70,7 @@ const useAlg = () => {
           if (oddOrEven(arrayChunk[2]).type == "even") {
             if (oddOrEven(value).type == "odd") {
               // OE.push([value]);
-              console.log("third lock", value);
+
               temp = {
                 type: "newSet",
                 value: value,
@@ -112,8 +110,6 @@ const useAlg = () => {
       } else if (temp.type == "current") {
         OE[OE.length - 1].push(temp.value);
       }
-      // console.log(value);
-      console.log(OE);
 
       return OE;
     }
@@ -135,7 +131,6 @@ const useAlg = () => {
 
       let lastSubArray = [EO[EO.length - 1]];
       lastSubArray.map((arrayChunk, index) => {
-        // console.log({ arrayChunk: arrayChunk.length });
         if (arrayChunk.length === 1) {
           temp = {
             type: "current",
@@ -164,7 +159,7 @@ const useAlg = () => {
           if (oddOrEven(arrayChunk[2]).type == "odd") {
             if (oddOrEven(value).type == "even") {
               // OE.push([value]);
-              console.log("third lock", value);
+
               temp = {
                 type: "newSet",
                 value: value,
