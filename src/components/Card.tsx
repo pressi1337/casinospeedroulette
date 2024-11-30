@@ -100,12 +100,13 @@ export default function Card({
       if (values[0] % 2 == 0 && values[1] % 2 != 0 && values[2] % 2 == 0) {
         return "bg-green-300";
       }
-      if (values[0] % 2 == 0 && values[1] == 0 && values[2] % 2 == 0) {
-        return "bg-green-300";
-      }
       if (values[0] % 2 == 0 && values[1] == 0 && values[2] == 0) {
         return "bg-red-300";
       }
+      if (values[0] % 2 == 0 && values[1] == 0 && values[2] % 2 == 0) {
+        return "bg-green-300";
+      }
+
       return "bg-red-300";
     }
     return "bg-stone-300";
