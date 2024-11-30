@@ -61,6 +61,73 @@ export default function Card({
     return "bg-red-300";
   };
 
+  const oddOddType = (values: any) => {
+    if (values.length == 1) {
+      return "bg-stone-300";
+    }
+    if (values.length == 2) {
+      if (values[0] % 2 != 0 && values[1] % 2 != 0) {
+        return "bg-green-300";
+      }
+      return "bg-stone-300";
+    }
+    if (values.length == 3) {
+      if (values[0] % 2 != 0 && values[1] % 2 == 0 && values[2] % 2 != 0) {
+        return "bg-green-300";
+      }
+      if (values[0] % 2 != 0 && values[1] == 0 && values[2] % 2 != 0) {
+        return "bg-green-300";
+      }
+      if (values[0] % 2 != 0 && values[1] == 0 && values[2] % 2 == 0) {
+        return "bg-red-300";
+      }
+      return "bg-red-300";
+    }
+    return "bg-stone-300";
+  };
+
+  const evenEvenType = (values: any) => {
+    if (values.length == 1) {
+      return "bg-stone-300";
+    }
+    if (values.length == 2) {
+      if (values[0] % 2 == 0 && values[1] % 2 == 0) {
+        return "bg-green-300";
+      }
+      return "bg-stone-300";
+    }
+    if (values.length == 3) {
+      if (values[0] % 2 == 0 && values[1] % 2 != 0 && values[2] % 2 == 0) {
+        return "bg-green-300";
+      }
+      if (values[0] % 2 == 0 && values[1] == 0 && values[2] % 2 == 0) {
+        return "bg-green-300";
+      }
+      if (values[0] % 2 == 0 && values[1] == 0 && values[2] == 0) {
+        return "bg-red-300";
+      }
+      return "bg-red-300";
+    }
+    return "bg-stone-300";
+  };
+
+  const COLOR_PATTERN = (type: any, values: any) => {
+    if (type === "oddEven") {
+      return OddEvenType(values);
+    }
+    if (type === "evenOdd") {
+      return EvenOddType(values);
+    }
+    if (type === "oddOdd") {
+      return oddOddType(values);
+    }
+    if (type === "evenEven") {
+      return evenEvenType(values);
+    }
+
+    return "bg-stone-300";
+  };
+
   return (
     <div className="w-full max-w-xs">
       <div className="object-cover object-center w-full p-5 mx-auto rounded-lg bg-blue-50 border border-blue-10">
@@ -68,9 +135,10 @@ export default function Card({
           <h5 className="text-lg font-bold text-[#9F0D0F]">{title}</h5>
           {clientRecord?.map((item: any, index: number) => (
             <div
-              className={`flex items-center gap-1 my-1 rounded ${
-                type == "oddEven" ? OddEvenType(item) : EvenOddType(item)
-              } p-2`}
+              className={`flex items-center gap-1 my-1 rounded ${COLOR_PATTERN(
+                type,
+                item
+              )} p-2`}
               key={`record-${index}`}
             >
               <p className="my-auto text-black">

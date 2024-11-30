@@ -7,15 +7,20 @@ import { useEffect, useRef, useState } from "react";
 export default function Home() {
   const tabSection = useRef<HTMLDivElement>(null);
   const [val, setVal] = useState("");
-  const { oddEvenPattern, EvenOddPattern } = useAlg();
+  const { oddEvenPattern, EvenOddPattern, oddOddPattern, evenEvenPattern } =
+    useAlg();
   const [OE, setOE] = useState([]);
   const [EO, setEO] = useState([]);
+  const [OO, setOO] = useState([]);
+  const [EE, setEE] = useState([]);
 
   const valueEnter = (e: any) => {
     e.preventDefault();
     if (val) {
       setOE(oddEvenPattern(OE, val));
       setEO(EvenOddPattern(EO, val));
+      setOO(oddOddPattern(OO, val));
+      setEE(evenEvenPattern(EE, val));
       setVal("");
     }
   };
@@ -33,7 +38,6 @@ export default function Home() {
   };
 
   useEffect(() => {
-    console.log({ fire: "fire" });
     tabSection.current?.scrollIntoView({ behavior: "smooth" });
   }, [val]);
 
@@ -62,6 +66,22 @@ export default function Home() {
             type="evenOdd"
             handleUndo={() => {
               undoOptionOE(EO, setEO);
+            }}
+          />
+          <Card
+            title={"ODD-ODD"}
+            record={OO}
+            type="oddOdd"
+            handleUndo={() => {
+              undoOptionOE(OO, setOO);
+            }}
+          />
+          <Card
+            title={"EVEN-EVEN"}
+            record={EE}
+            type="evenEven"
+            handleUndo={() => {
+              undoOptionOE(EE, setEE);
             }}
           />
         </div>
