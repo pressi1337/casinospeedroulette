@@ -6,6 +6,10 @@ import { useEffect, useRef, useState } from "react";
 
 export default function Home() {
   const tabSection = useRef<HTMLDivElement>(null);
+  const OEContainerRef = useRef<HTMLDivElement>(null);
+  const EOContainerRef = useRef<HTMLDivElement>(null);
+  const OOContainerRef = useRef<HTMLDivElement>(null);
+  const EEContainerRef = useRef<HTMLDivElement>(null);
   const [val, setVal] = useState("");
   const { oddEvenPattern, EvenOddPattern, oddOddPattern, evenEvenPattern } =
     useAlg();
@@ -33,12 +37,14 @@ export default function Home() {
       temp.pop();
       array[array.length - 1] = temp;
     }
-
     changeState([...array]); // Ensure re-render
   };
 
   useEffect(() => {
-    tabSection.current?.scrollIntoView({ behavior: "smooth" });
+    OEContainerRef.current?.scrollIntoView({ behavior: "smooth" });
+    EOContainerRef.current?.scrollIntoView({ behavior: "smooth" });
+    EEContainerRef.current?.scrollIntoView({ behavior: "smooth" });
+    OOContainerRef.current?.scrollIntoView({ behavior: "smooth" });
   }, [val]);
 
   return (
@@ -51,41 +57,74 @@ export default function Home() {
 
       {/* Scrollable Grid Section */}
       <main className="flex-1 overflow-y-auto p-6">
-        <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
-          <Card
-            title={"ODD-EVEN"}
-            record={OE}
-            type="oddEven"
-            handleUndo={() => {
-              undoOptionOE(OE, setOE);
-            }}
-          />
-          <Card
-            title={"EVEN-ODD"}
-            record={EO}
-            type="evenOdd"
-            handleUndo={() => {
-              undoOptionOE(EO, setEO);
-            }}
-          />
-          <Card
-            title={"ODD-ODD"}
-            record={OO}
-            type="oddOdd"
-            handleUndo={() => {
-              undoOptionOE(OO, setOO);
-            }}
-          />
-          <Card
-            title={"EVEN-EVEN"}
-            record={EE}
-            type="evenEven"
-            handleUndo={() => {
-              undoOptionOE(EE, setEE);
-            }}
-          />
+        <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-4 xl:grid-cols-4">
+          <div className="h-[calc(80vh-5rem)] overflow-y-auto border border-gray-300 rounded shadow p-4">
+            <Card
+              title={"ODD-EVEN"}
+              record={OE}
+              type="oddEven"
+              handleUndo={() => {
+                undoOptionOE(OE, setOE);
+              }}
+            />
+            <div ref={OEContainerRef} className="h-1 w-full bg-transparent" />
+          </div>
+          <div className="h-[calc(80vh-5rem)] overflow-y-auto border border-gray-300 rounded shadow p-4">
+            <Card
+              title={"EVEN-ODD"}
+              record={EO}
+              type="evenOdd"
+              handleUndo={() => {
+                undoOptionOE(EO, setEO);
+              }}
+            />
+            <div ref={EOContainerRef} className="h-1 w-full bg-transparent" />
+          </div>
+          <div className="h-[calc(80vh-5rem)] overflow-y-auto border border-gray-300 rounded shadow p-4">
+            <Card
+              title={"ODD-ODD"}
+              record={OO}
+              type="oddOdd"
+              handleUndo={() => {
+                undoOptionOE(OO, setOO);
+              }}
+            />
+            <div ref={OOContainerRef} className="h-1 w-full bg-transparent" />
+          </div>
+          <div className="h-[calc(80vh-5rem)] overflow-y-auto border border-gray-300 rounded shadow p-4">
+            <Card
+              title={"EVEN-EVEN"}
+              record={EE}
+              type="evenEven"
+              handleUndo={() => {
+                undoOptionOE(EE, setEE);
+              }}
+            />
+            <div ref={EEContainerRef} className="h-1 w-full bg-transparent" />
+          </div>
+          {/* <div className="h-[calc(80vh-5rem)] overflow-y-auto border border-gray-300 rounded shadow p-4">
+            <Card
+              title={"EVEN-EVEN"}
+              record={EE}
+              type="evenEven"
+              handleUndo={() => {
+                undoOptionOE(EE, setEE);
+              }}
+            />
+            <div ref={EEContainerRef} className="h-1 w-full bg-transparent" />
+          </div>
+          <div className="h-[calc(80vh-5rem)] overflow-y-auto border border-gray-300 rounded shadow p-4">
+            <Card
+              title={"EVEN-EVEN"}
+              record={EE}
+              type="evenEven"
+              handleUndo={() => {
+                undoOptionOE(EE, setEE);
+              }}
+            />
+            <div ref={EEContainerRef} className="h-1 w-full bg-transparent" />
+          </div> */}
         </div>
-        <div ref={tabSection} className="h-1 w-full bg-transparent" />
       </main>
 
       {/* Sticky Footer Form */}

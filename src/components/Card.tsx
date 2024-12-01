@@ -97,12 +97,16 @@ export default function Card({
       return "bg-stone-300";
     }
     if (values.length == 3) {
-      if (values[0] % 2 == 0 && values[1] % 2 != 0 && values[2] % 2 == 0) {
-        return "bg-green-300";
-      }
       if (values[0] % 2 == 0 && values[1] == 0 && values[2] == 0) {
         return "bg-red-300";
       }
+      if (values[0] % 2 == 0 && values[1] != 0 && values[2] == 0) {
+        return "bg-red-300";
+      }
+      if (values[0] % 2 == 0 && values[1] % 2 != 0 && values[2] % 2 == 0) {
+        return "bg-green-300";
+      }
+
       if (values[0] % 2 == 0 && values[1] == 0 && values[2] % 2 == 0) {
         return "bg-green-300";
       }
@@ -133,7 +137,6 @@ export default function Card({
     <div className="w-full max-w-xs">
       <div className="object-cover object-center w-full p-5 mx-auto rounded-lg bg-blue-50 border border-blue-10">
         <div>
-          <h5 className="text-lg font-bold text-[#9F0D0F]">{title}</h5>
           {clientRecord?.map((item: any, index: number) => (
             <div
               className={`flex items-center gap-1 my-1 rounded ${COLOR_PATTERN(
@@ -162,6 +165,7 @@ export default function Card({
               UNDO: 🗑️
             </button>
           )}
+          <h5 className="text-lg font-bold text-[#9F0D0F]">{title}</h5>
         </div>
       </div>
     </div>
