@@ -336,6 +336,45 @@ const useAlg = () => {
     }
   };
 
+  const normalOEPattern = (prevOddEven: any, value: any) => {
+    let OE: any = prevOddEven;
+    if (!OE.length) {
+      OE.push([value]);
+      return OE;
+    } else {
+      let temp: any = {
+        type: undefined,
+        value: undefined,
+        index: undefined,
+      };
+
+      let lastSubArray = [OE[OE.length - 1]];
+      lastSubArray.map((arrayChunk, index) => {
+        if (arrayChunk.length === 1) {
+          temp = {
+            type: "current",
+            value: value,
+            index: index,
+          };
+        }
+        if (arrayChunk.length === 2) {
+          temp = {
+            type: "newSet",
+            value: value,
+          };
+        }
+      });
+
+      if (temp.type == "newSet") {
+        OE.push([value]);
+      } else if (temp.type == "current") {
+        OE[OE.length - 1].push(temp.value);
+      }
+
+      return OE;
+    }
+  };
+
   return {
     oddEven,
     evenOdd,
@@ -343,6 +382,7 @@ const useAlg = () => {
     EvenOddPattern,
     oddOddPattern,
     evenEvenPattern,
+    normalOEPattern,
   };
 };
 

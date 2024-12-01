@@ -10,13 +10,21 @@ export default function Home() {
   const EOContainerRef = useRef<HTMLDivElement>(null);
   const OOContainerRef = useRef<HTMLDivElement>(null);
   const EEContainerRef = useRef<HTMLDivElement>(null);
+  const NOEContainerRef = useRef<HTMLDivElement>(null);
+  const HLContainerRef = useRef<HTMLDivElement>(null);
   const [val, setVal] = useState("");
-  const { oddEvenPattern, EvenOddPattern, oddOddPattern, evenEvenPattern } =
-    useAlg();
+  const {
+    oddEvenPattern,
+    EvenOddPattern,
+    oddOddPattern,
+    evenEvenPattern,
+    normalOEPattern,
+  } = useAlg();
   const [OE, setOE] = useState([]);
   const [EO, setEO] = useState([]);
   const [OO, setOO] = useState([]);
   const [EE, setEE] = useState([]);
+  const [NOE, setNOE] = useState([]);
 
   const valueEnter = (e: any) => {
     e.preventDefault();
@@ -25,6 +33,7 @@ export default function Home() {
       setEO(EvenOddPattern(EO, val));
       setOO(oddOddPattern(OO, val));
       setEE(evenEvenPattern(EE, val));
+      setNOE(normalOEPattern(NOE, val));
       setVal("");
     }
   };
@@ -45,6 +54,8 @@ export default function Home() {
     EOContainerRef.current?.scrollIntoView({ behavior: "smooth" });
     EEContainerRef.current?.scrollIntoView({ behavior: "smooth" });
     OOContainerRef.current?.scrollIntoView({ behavior: "smooth" });
+    NOEContainerRef.current?.scrollIntoView({ behavior: "smooth" });
+    HLContainerRef.current?.scrollIntoView({ behavior: "smooth" });
   }, [val]);
 
   return (
@@ -57,7 +68,7 @@ export default function Home() {
 
       {/* Scrollable Grid Section */}
       <main className="flex-1 overflow-y-auto p-6">
-        <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-4 xl:grid-cols-4">
+        <div className="grid gap-1 sm:grid-cols-2 lg:grid-cols-6 xl:grid-cols-65">
           <div className="h-[calc(80vh-5rem)] overflow-y-auto border border-gray-300 rounded shadow p-4">
             <Card
               title={"ODD-EVEN"}
@@ -102,28 +113,29 @@ export default function Home() {
             />
             <div ref={EEContainerRef} className="h-1 w-full bg-transparent" />
           </div>
-          {/* <div className="h-[calc(80vh-5rem)] overflow-y-auto border border-gray-300 rounded shadow p-4">
-            <Card
-              title={"EVEN-EVEN"}
-              record={EE}
-              type="evenEven"
-              handleUndo={() => {
-                undoOptionOE(EE, setEE);
-              }}
-            />
-            <div ref={EEContainerRef} className="h-1 w-full bg-transparent" />
-          </div>
           <div className="h-[calc(80vh-5rem)] overflow-y-auto border border-gray-300 rounded shadow p-4">
             <Card
-              title={"EVEN-EVEN"}
-              record={EE}
-              type="evenEven"
+              title={"STD-OE"}
+              record={NOE}
+              type="normalOddEven"
               handleUndo={() => {
-                undoOptionOE(EE, setEE);
+                undoOptionOE(NOE, setNOE);
               }}
             />
-            <div ref={EEContainerRef} className="h-1 w-full bg-transparent" />
-          </div> */}
+            <div ref={NOEContainerRef} className="h-1 w-full bg-transparent" />
+          </div>
+
+          <div className="h-[calc(80vh-5rem)] overflow-y-auto border border-gray-300 rounded shadow p-4">
+            <Card
+              title={"HIGH-LOW"}
+              record={NOE}
+              type="highLow"
+              handleUndo={() => {
+                undoOptionOE(NOE, setNOE);
+              }}
+            />
+            <div ref={HLContainerRef} className="h-1 w-full bg-transparent" />
+          </div>
         </div>
       </main>
 

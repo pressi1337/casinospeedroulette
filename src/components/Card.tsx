@@ -116,6 +116,63 @@ export default function Card({
     return "bg-stone-300";
   };
 
+  const normalOEType = (values: any) => {
+    if (values.length == 1) {
+      return "bg-stone-300";
+    }
+    if (values.length == 2) {
+      if (values[0] == 0 || values[1] == 0) {
+        return "bg-red-300";
+      }
+
+      if (
+        (values[0] % 2 != 0 && values[1] % 2 != 0) ||
+        (values[0] % 2 == 0 && values[1] % 2 == 0)
+      ) {
+        return "bg-red-300";
+      }
+
+      return "bg-green-300";
+    }
+
+    return "bg-stone-300";
+  };
+
+  const FindHingLow = (val: any) => {
+    if (val == 0) {
+      return 0;
+    }
+
+    if (val >= 19) {
+      return "H";
+    }
+    if (val <= 18) {
+      return "L";
+    }
+  };
+
+  const highType = (values: any) => {
+    if (values.length == 1) {
+      return "bg-stone-300";
+    }
+    if (values.length == 2) {
+      if (FindHingLow(values[0]) == 0 || FindHingLow(values[1]) == 0) {
+        return "bg-red-300";
+      }
+
+      if (
+        (FindHingLow(values[0]) == "H" && FindHingLow(values[1]) == "H") ||
+        (FindHingLow(values[0]) == "L" && FindHingLow(values[1]) == "L")
+      ) {
+        return "bg-red-300";
+      }
+
+      return "bg-green-300";
+    }
+
+    return "bg-stone-300";
+  };
+
   const COLOR_PATTERN = (type: any, values: any) => {
     if (type === "oddEven") {
       return OddEvenType(values);
@@ -128,6 +185,13 @@ export default function Card({
     }
     if (type === "evenEven") {
       return evenEvenType(values);
+    }
+    if (type === "normalOddEven") {
+      return normalOEType(values);
+    }
+
+    if (type === "highLow") {
+      return highType(values);
     }
 
     return "bg-stone-300";
