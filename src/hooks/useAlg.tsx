@@ -339,7 +339,10 @@ const useAlg = () => {
   const normalOEPattern = (prevOddEven: any, value: any) => {
     let OE: any = prevOddEven;
     if (!OE.length) {
-      OE.push([value]);
+      if (value != 0) {
+        OE.push([value]);
+      }
+
       return OE;
     } else {
       let temp: any = {
@@ -358,10 +361,12 @@ const useAlg = () => {
           };
         }
         if (arrayChunk.length === 2) {
-          temp = {
-            type: "newSet",
-            value: value,
-          };
+          if (value != 0) {
+            temp = {
+              type: "newSet",
+              value: value,
+            };
+          }
         }
       });
 

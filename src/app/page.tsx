@@ -12,6 +12,7 @@ export default function Home() {
   const EEContainerRef = useRef<HTMLDivElement>(null);
   const NOEContainerRef = useRef<HTMLDivElement>(null);
   const HLContainerRef = useRef<HTMLDivElement>(null);
+  const [history, setHistory] = useState<any>([]);
   const [val, setVal] = useState("");
   const {
     oddEvenPattern,
@@ -29,6 +30,17 @@ export default function Home() {
   const valueEnter = (e: any) => {
     e.preventDefault();
     if (val) {
+      setHistory((prevHistory: any) => [
+        ...prevHistory,
+        {
+          OE: JSON.stringify(OE),
+          EO: JSON.stringify(EO),
+          OO: JSON.stringify(OO),
+          EE: JSON.stringify(EE),
+          NOE: JSON.stringify(NOE),
+        }, // Save current snapshot
+      ]);
+
       setOE(oddEvenPattern(OE, val));
       setEO(EvenOddPattern(EO, val));
       setOO(oddOddPattern(OO, val));
@@ -49,6 +61,31 @@ export default function Home() {
     changeState([...array]); // Ensure re-render
   };
 
+  console.log({
+    history,
+  });
+  const undoOption = () => {
+    setHistory((prevHistory: any) => prevHistory.slice(0, -1));
+    if (history.length > 0) {
+      // Remove the last history entry
+
+      const lastState: any = history[history.length - 2]; // Get the last snapshot
+
+      if (lastState) {
+        setOE((prv) => JSON.parse(lastState.OE));
+        setEO((prv) => JSON.parse(lastState.EO));
+        setOO((prv) => JSON.parse(lastState.OO));
+        setEE((prv) => JSON.parse(lastState.EE));
+        setNOE((prv) => JSON.parse(lastState.NOE));
+      } else {
+        setOE((prv) => []);
+        setEO((prv) => []);
+        setOO((prv) => []);
+        setEE((prv) => []);
+        setNOE((prv) => []);
+      }
+    }
+  };
   useEffect(() => {
     OEContainerRef.current?.scrollIntoView({ behavior: "smooth" });
     EOContainerRef.current?.scrollIntoView({ behavior: "smooth" });
@@ -141,26 +178,31 @@ export default function Home() {
 
       {/* Sticky Footer Form */}
       <footer className="sticky bottom-0 bg-white p-4 border-t shadow-md">
-        <form
-          onSubmit={valueEnter}
-          className="flex max-w-md mx-auto border-2 border-blue-500 overflow-hidden"
-        >
-          <input
-            type="text"
-            placeholder="Enter the Numbers"
-            className="w-full outline-none bg-white text-gray-600 text-sm px-4 py-3 appearance-none"
-            value={val}
-            onChange={(e: any) => {
-              if (!isNaN(e.target.value)) {
-                setVal(e.target.value);
-              }
-            }}
-          />
+        <form onSubmit={valueEnter} className="flex  max-w-md mx-auto  ">
+          <div className="flex border-2 border-blue-500 overflow-hidden">
+            <input
+              type="text"
+              placeholder="Enter the Numbers"
+              className="w-full outline-none bg-white text-gray-600 text-sm px-4 py-3 appearance-none"
+              value={val}
+              onChange={(e: any) => {
+                if (!isNaN(e.target.value)) {
+                  setVal(e.target.value);
+                }
+              }}
+            />
+            <button
+              type="submit"
+              className="flex items-center justify-center bg-[#007bff] px-5 text-sm text-white"
+            >
+              SUBMIT
+            </button>
+          </div>
           <button
-            type="submit"
-            className="flex items-center justify-center bg-[#007bff] px-5 text-sm text-white"
+            onClick={undoOption}
+            className="flex mx-2 items-center justify-center bg-red-700 px-5 text-sm text-white"
           >
-            SUBMIT
+            🗑️ UNDO
           </button>
         </form>
       </footer>
