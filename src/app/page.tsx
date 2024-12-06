@@ -97,6 +97,7 @@ export default function Home() {
     OOContainerRef.current?.scrollIntoView({ behavior: "smooth" });
     NOEContainerRef.current?.scrollIntoView({ behavior: "smooth" });
     HLContainerRef.current?.scrollIntoView({ behavior: "smooth" });
+    SANContainerRef.current?.scrollIntoView({ behavior: "smooth" });
   }, [val]);
 
   return (
