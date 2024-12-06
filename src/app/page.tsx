@@ -12,6 +12,7 @@ export default function Home() {
   const EEContainerRef = useRef<HTMLDivElement>(null);
   const NOEContainerRef = useRef<HTMLDivElement>(null);
   const HLContainerRef = useRef<HTMLDivElement>(null);
+  const SANContainerRef = useRef<HTMLDivElement>(null);
   const [history, setHistory] = useState<any>([]);
   const [val, setVal] = useState("");
   const {
@@ -20,12 +21,14 @@ export default function Home() {
     oddOddPattern,
     evenEvenPattern,
     normalOEPattern,
+    sanPattern,
   } = useAlg();
   const [OE, setOE] = useState([]);
   const [EO, setEO] = useState([]);
   const [OO, setOO] = useState([]);
   const [EE, setEE] = useState([]);
   const [NOE, setNOE] = useState([]);
+  const [SAN, setSAN] = useState([]);
 
   const valueEnter = (e: any) => {
     e.preventDefault();
@@ -38,6 +41,7 @@ export default function Home() {
           OO: JSON.stringify(OO),
           EE: JSON.stringify(EE),
           NOE: JSON.stringify(NOE),
+          SAN: JSON.stringify(SAN),
         }, // Save current snapshot
       ]);
 
@@ -46,6 +50,7 @@ export default function Home() {
       setOO(oddOddPattern(OO, val));
       setEE(evenEvenPattern(EE, val));
       setNOE(normalOEPattern(NOE, val));
+      setSAN(sanPattern(SAN, val));
       setVal("");
     }
   };
@@ -105,7 +110,7 @@ export default function Home() {
 
       {/* Scrollable Grid Section */}
       <main className="flex-1 overflow-y-auto p-6">
-        <div className="grid gap-1 sm:grid-cols-2 lg:grid-cols-6 xl:grid-cols-65">
+        <div className="grid gap-1 sm:grid-cols-2 lg:grid-cols-7 xl:grid-cols-7">
           <div className="h-[calc(80vh-5rem)] overflow-y-auto border border-gray-300 rounded shadow p-4">
             <Card
               title={"ODD-EVEN"}
@@ -161,17 +166,28 @@ export default function Home() {
             />
             <div ref={NOEContainerRef} className="h-1 w-full bg-transparent" />
           </div>
-
           <div className="h-[calc(80vh-5rem)] overflow-y-auto border border-gray-300 rounded shadow p-4">
             <Card
-              title={"HIGH-LOW"}
+              title={"STD-OE"}
               record={NOE}
-              type="highLow"
+              type="normalOddEven"
               handleUndo={() => {
                 undoOptionOE(NOE, setNOE);
               }}
             />
-            <div ref={HLContainerRef} className="h-1 w-full bg-transparent" />
+            <div className="h-1 w-full bg-transparent" />
+          </div>
+
+          <div className="h-[calc(80vh-5rem)] overflow-y-auto border border-gray-300 rounded shadow p-4">
+            <Card
+              title={"SAN"}
+              record={SAN}
+              type="SAN"
+              handleUndo={() => {
+                undoOptionOE(SAN, setNOE);
+              }}
+            />
+            <div ref={SANContainerRef} className="h-1 w-full bg-transparent" />
           </div>
         </div>
       </main>

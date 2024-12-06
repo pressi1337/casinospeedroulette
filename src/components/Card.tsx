@@ -172,6 +172,34 @@ export default function Card({
 
     return "bg-stone-300";
   };
+  const sanColor = (values: any) => {
+    if (values.length == 1) {
+      return "bg-stone-300";
+    }
+    if (values.length == 2) {
+      if (values[0] % 2 == 0 && values[1] % 2 == 0) {
+        return "bg-green-300";
+      }
+
+      if (values[0] % 2 != 0 && values[1] % 2 != 0) {
+        return "bg-green-300";
+      }
+
+      return "bg-red-300";
+    }
+
+    if (values.length === 3) {
+      if (values[0] % 2 != 0 && values[1] % 2 == 0 && values[2] % 2 != 0) {
+        return "bg-green-300";
+      }
+      if (values[0] % 2 == 0 && values[1] % 2 != 0 && values[2] % 2 == 0) {
+        return "bg-green-300";
+      }
+      return "bg-red-300";
+    }
+
+    return "bg-stone-300";
+  };
 
   const COLOR_PATTERN = (type: any, values: any) => {
     if (type === "oddEven") {
@@ -192,6 +220,10 @@ export default function Card({
 
     if (type === "highLow") {
       return highType(values);
+    }
+
+    if (type === "SAN") {
+      return sanColor(values);
     }
 
     return "bg-stone-300";

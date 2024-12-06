@@ -380,6 +380,82 @@ const useAlg = () => {
     }
   };
 
+  const sanPattern = (prevOddEven: any, value: any) => {
+    let OE: any = prevOddEven;
+    if (!OE.length) {
+      if (oddOrEven(value).type !== "zero") {
+        OE.push([value]);
+      }
+
+      return OE;
+    } else {
+      let temp: any = {
+        type: undefined,
+        value: undefined,
+        index: undefined,
+      };
+
+      let lastSubArray = [OE[OE.length - 1]];
+      lastSubArray.map((arrayChunk, index) => {
+        if (arrayChunk.length === 1) {
+          temp = {
+            type: "current",
+            value: value,
+            index: index,
+          };
+        }
+        if (arrayChunk.length === 2) {
+          if (
+            (oddOrEven(arrayChunk[0]).type == "even" &&
+              oddOrEven(arrayChunk[1]).type == "even") ||
+            (oddOrEven(arrayChunk[0]).type == "odd" &&
+              oddOrEven(arrayChunk[1]).type == "odd")
+          ) {
+            if (oddOrEven(value).type !== "zero") {
+              temp = {
+                type: "newSet",
+                value: value,
+              };
+            }
+          } else {
+            if (
+              oddOrEven(arrayChunk[1]).type == "zero" &&
+              oddOrEven(value).type !== "zero"
+            ) {
+              temp = {
+                type: "newSet",
+                value: value,
+              };
+            } else {
+              temp = {
+                type: "current",
+                value: value,
+                index: index,
+              };
+            }
+          }
+        }
+
+        if (arrayChunk.length === 3) {
+          if (oddOrEven(value).type !== "zero") {
+            temp = {
+              type: "newSet",
+              value: value,
+            };
+          }
+        }
+      });
+
+      if (temp.type == "newSet") {
+        OE.push([value]);
+      } else if (temp.type == "current") {
+        OE[OE.length - 1].push(temp.value);
+      }
+
+      return OE;
+    }
+  };
+
   return {
     oddEven,
     evenOdd,
@@ -388,6 +464,7 @@ const useAlg = () => {
     oddOddPattern,
     evenEvenPattern,
     normalOEPattern,
+    sanPattern,
   };
 };
 
