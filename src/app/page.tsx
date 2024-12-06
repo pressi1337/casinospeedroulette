@@ -66,9 +66,6 @@ export default function Home() {
     changeState([...array]); // Ensure re-render
   };
 
-  console.log({
-    history,
-  });
   const undoOption = () => {
     setHistory((prevHistory: any) => prevHistory.slice(0, -1));
     if (history.length > 0) {
@@ -82,12 +79,14 @@ export default function Home() {
         setOO((prv) => JSON.parse(lastState.OO));
         setEE((prv) => JSON.parse(lastState.EE));
         setNOE((prv) => JSON.parse(lastState.NOE));
+        setSAN((prv) => JSON.parse(lastState.SAN));
       } else {
         setOE((prv) => []);
         setEO((prv) => []);
         setOO((prv) => []);
         setEE((prv) => []);
         setNOE((prv) => []);
+        setSAN((prv) => []);
       }
     }
   };
