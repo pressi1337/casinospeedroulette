@@ -168,14 +168,14 @@ export default function Home() {
           </div>
           <div className="h-[calc(80vh-5rem)] overflow-y-auto border border-gray-300 rounded shadow p-4">
             <Card
-              title={"STD-OE"}
+              title={"HL"}
               record={NOE}
-              type="normalOddEven"
+              type="highLow"
               handleUndo={() => {
                 undoOptionOE(NOE, setNOE);
               }}
             />
-            <div className="h-1 w-full bg-transparent" />
+            <div ref={HLContainerRef} className="h-1 w-full bg-transparent" />
           </div>
 
           <div className="h-[calc(80vh-5rem)] overflow-y-auto border border-gray-300 rounded shadow p-4">
