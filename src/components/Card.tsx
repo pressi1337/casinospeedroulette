@@ -177,6 +177,9 @@ export default function Card({
       return "bg-stone-300";
     }
     if (values.length == 2) {
+      if (values[1] == 0) {
+        return "bg-red-300";
+      }
       if (values[0] % 2 == 0 && values[1] % 2 == 0) {
         return "bg-green-300";
       }
