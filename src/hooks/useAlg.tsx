@@ -456,6 +456,220 @@ const useAlg = () => {
     }
   };
 
+  const oddOddv4Pattern = (prevOddEven: any, value: any) => {
+    let OE: any = prevOddEven;
+
+    if (!OE.length) {
+      if (oddOrEven(value).type == "odd") {
+        OE.push([value]);
+      }
+
+      return OE;
+    } else {
+      let temp: any = {
+        type: undefined,
+        value: undefined,
+        index: undefined,
+      };
+
+      let lastSubArray = [OE[OE.length - 1]];
+      lastSubArray.map((arrayChunk, index) => {
+        if (arrayChunk.length === 1) {
+          temp = {
+            type: "current",
+            value: value,
+            index: index,
+          };
+        }
+        if (arrayChunk.length === 2) {
+          if (oddOrEven(value).type == "odd") {
+            temp = {
+              type: "newSet",
+              value: value,
+            };
+          }
+        }
+      });
+
+      if (temp.type == "newSet") {
+        OE.push([value]);
+      } else if (temp.type == "current") {
+        OE[OE.length - 1].push(temp.value);
+      }
+
+      return OE;
+    }
+  };
+
+  const evenEvenv4Pattern = (prevOddEven: any, value: any) => {
+    let OE: any = prevOddEven;
+
+    if (!OE.length) {
+      if (oddOrEven(value).type == "even") {
+        OE.push([value]);
+      }
+
+      return OE;
+    } else {
+      let temp: any = {
+        type: undefined,
+        value: undefined,
+        index: undefined,
+      };
+
+      let lastSubArray = [OE[OE.length - 1]];
+      lastSubArray.map((arrayChunk, index) => {
+        if (arrayChunk.length === 1) {
+          temp = {
+            type: "current",
+            value: value,
+            index: index,
+          };
+        }
+        if (arrayChunk.length === 2) {
+          if (oddOrEven(value).type == "even") {
+            temp = {
+              type: "newSet",
+              value: value,
+            };
+          }
+        }
+      });
+
+      if (temp.type == "newSet") {
+        OE.push([value]);
+      } else if (temp.type == "current") {
+        OE[OE.length - 1].push(temp.value);
+      }
+
+      return OE;
+    }
+  };
+
+  const OOO4V4Pattern = (prevOddEven: any, value: any) => {
+    let EO: any = prevOddEven;
+    if (!EO.length) {
+      if (oddOrEven(value).type == "odd") {
+        EO.push([value]);
+      }
+      return EO;
+    } else {
+      let temp: any = {
+        type: undefined,
+        value: undefined,
+        index: undefined,
+      };
+
+      let lastSubArray = [EO[EO.length - 1]];
+      lastSubArray.map((arrayChunk, index) => {
+        if (arrayChunk.length === 1) {
+          if (oddOrEven(value).type == "odd") {
+            temp = {
+              type: "current",
+              value: value,
+              index: index,
+            };
+          } else {
+            temp = {
+              type: "reset",
+              value: value,
+              index: index,
+            };
+          }
+        }
+        if (arrayChunk.length === 2) {
+          temp = {
+            type: "current",
+            value: value,
+            index: index,
+          };
+        }
+
+        if (arrayChunk.length === 3) {
+          if (oddOrEven(value).type == "odd") {
+            // OE.push([value]);
+            temp = {
+              type: "newSet",
+              value: value,
+            };
+          }
+        }
+      });
+
+      if (temp.type == "newSet") {
+        EO.push([value]);
+      } else if (temp.type == "current") {
+        EO[EO.length - 1].push(temp.value);
+      } else if (temp.type === "reset") {
+        EO.pop();
+      }
+
+      return EO;
+    }
+  };
+
+  const EEE4V4Pattern = (prevOddEven: any, value: any) => {
+    let EO: any = prevOddEven;
+    if (!EO.length) {
+      if (oddOrEven(value).type == "even") {
+        EO.push([value]);
+      }
+      return EO;
+    } else {
+      let temp: any = {
+        type: undefined,
+        value: undefined,
+        index: undefined,
+      };
+
+      let lastSubArray = [EO[EO.length - 1]];
+      lastSubArray.map((arrayChunk, index) => {
+        if (arrayChunk.length === 1) {
+          if (oddOrEven(value).type == "even") {
+            temp = {
+              type: "current",
+              value: value,
+              index: index,
+            };
+          } else {
+            temp = {
+              type: "reset",
+              value: value,
+              index: index,
+            };
+          }
+        }
+        if (arrayChunk.length === 2) {
+          temp = {
+            type: "current",
+            value: value,
+            index: index,
+          };
+        }
+
+        if (arrayChunk.length === 3) {
+          if (oddOrEven(value).type == "even") {
+            // OE.push([value]);
+            temp = {
+              type: "newSet",
+              value: value,
+            };
+          }
+        }
+      });
+
+      if (temp.type == "newSet") {
+        EO.push([value]);
+      } else if (temp.type == "current") {
+        EO[EO.length - 1].push(temp.value);
+      } else if (temp.type === "reset") {
+        EO.pop();
+      }
+
+      return EO;
+    }
+  };
+
   return {
     oddEven,
     evenOdd,
@@ -465,6 +679,10 @@ const useAlg = () => {
     evenEvenPattern,
     normalOEPattern,
     sanPattern,
+    oddOddv4Pattern,
+    evenEvenv4Pattern,
+    OOO4V4Pattern,
+    EEE4V4Pattern,
   };
 };
 

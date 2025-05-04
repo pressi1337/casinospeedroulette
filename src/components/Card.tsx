@@ -8,6 +8,8 @@ export default function Card({
   record = [],
   type = "oddEven",
   handleUndo = () => {},
+  conditionCheckShow = false,
+  openBoxLimit = 0,
 }) {
   const [clientRecord, setClientRecord] = useState(record);
 
@@ -204,6 +206,179 @@ export default function Card({
     return "bg-stone-300";
   };
 
+  const OddODDV4Type = (values: any) => {
+    if (values.length == 1) {
+      return "bg-stone-300";
+    }
+    if (values.length == 2) {
+      if (values[0] % 2 != 0 && values[1] % 2 !== 0) {
+        return "bg-green-300";
+      }
+
+      if (values[0] % 2 != 0 && values[1] % 2 == 0) {
+        return "bg-red-300";
+      }
+      return "bg-stone-300";
+    }
+
+    return "bg-red-300";
+  };
+
+  const OddEV4Type = (values: any) => {
+    if (values.length == 1) {
+      return "bg-stone-300";
+    }
+    if (values.length == 2) {
+      if (values[0] % 2 != 0 && values[1] == 0) {
+        return "bg-red-300";
+      }
+
+      if (values[0] % 2 != 0 && values[1] % 2 == 0) {
+        return "bg-green-300";
+      }
+
+      if (values[0] % 2 != 0 && values[1] % 2 !== 0) {
+        return "bg-red-300";
+      }
+      return "bg-stone-300";
+    }
+
+    return "bg-red-300";
+  };
+
+  const evenEvenV4Type = (values: any) => {
+    if (values.length == 1) {
+      return "bg-stone-300";
+    }
+    if (values.length == 2) {
+      if (values[0] % 2 == 0 && values[1] == 0) {
+        return "bg-red-300";
+      }
+
+      if (values[0] % 2 == 0 && values[1] % 2 == 0) {
+        return "bg-green-300";
+      }
+
+      if (values[0] % 2 == 0 && values[1] % 2 !== 0) {
+        return "bg-red-300";
+      }
+      //  return "bg-stone-300";
+    }
+
+    return "bg-red-300";
+  };
+  const evenOddV4Type = (values: any) => {
+    if (values.length == 1) {
+      return "bg-stone-300";
+    }
+    if (values.length == 2) {
+      if (values[0] % 2 == 0 && values[1] == 0) {
+        return "bg-red-300";
+      }
+
+      if (values[0] % 2 == 0 && values[1] % 2 !== 0) {
+        return "bg-green-300";
+      }
+
+      if (values[0] % 2 == 0 && values[1] % 2 == 0) {
+        return "bg-red-300";
+      }
+      return "bg-stone-300";
+    }
+
+    return "bg-red-300";
+  };
+
+  const odododV4Type = (values: any) => {
+    if (values.length == 1) {
+      return "bg-stone-300";
+    }
+    if (values.length == 2) {
+      return "bg-stone-300";
+    }
+    if (values.length == 3) {
+      if (values[0] % 2 !== 0 && values[1] % 2 !== 0 && values[2] == 0) {
+        return "bg-red-300";
+      }
+      if (values[0] % 2 !== 0 && values[1] % 2 !== 0 && values[2] % 2 == 0) {
+        return "bg-red-300";
+      }
+      if (values[0] % 2 !== 0 && values[1] % 2 !== 0 && values[2] % 2 !== 0) {
+        return "bg-green-300";
+      }
+
+      return "bg-red-300";
+    }
+    return "bg-stone-300";
+  };
+
+  const evevevV4Type = (values: any) => {
+    if (values.length == 1) {
+      return "bg-stone-300";
+    }
+    if (values.length == 2) {
+      return "bg-stone-300";
+    }
+    if (values.length == 3) {
+      if (values[0] % 2 == 0 && values[1] % 2 == 0 && values[2] == 0) {
+        return "bg-red-300";
+      }
+      if (values[0] % 2 == 0 && values[1] % 2 == 0 && values[2] % 2 !== 0) {
+        return "bg-red-300";
+      }
+      if (values[0] % 2 == 0 && values[1] % 2 == 0 && values[2] % 2 == 0) {
+        return "bg-green-300";
+      }
+
+      return "bg-red-300";
+    }
+    return "bg-stone-300";
+  };
+
+  const ododevV4Type = (values: any) => {
+    if (values.length == 1) {
+      return "bg-stone-300";
+    }
+    if (values.length == 2) {
+      return "bg-stone-300";
+    }
+    if (values.length == 3) {
+      if (values[0] % 2 !== 0 && values[1] % 2 !== 0 && values[2] == 0) {
+        return "bg-red-300";
+      }
+      if (values[0] % 2 !== 0 && values[1] % 2 !== 0 && values[2] % 2 == 0) {
+        return "bg-green-300";
+      }
+      if (values[0] % 2 !== 0 && values[1] % 2 !== 0 && values[2] % 2 !== 0) {
+        return "bg-red-300";
+      }
+
+      return "bg-red-300";
+    }
+    return "bg-stone-300";
+  };
+  const evevodV4Type = (values: any) => {
+    if (values.length == 1) {
+      return "bg-stone-300";
+    }
+    if (values.length == 2) {
+      return "bg-stone-300";
+    }
+    if (values.length == 3) {
+      if (values[0] % 2 == 0 && values[1] % 2 == 0 && values[2] == 0) {
+        return "bg-red-300";
+      }
+      if (values[0] % 2 == 0 && values[1] % 2 == 0 && values[2] % 2 !== 0) {
+        return "bg-green-300";
+      }
+      if (values[0] % 2 == 0 && values[1] % 2 == 0 && values[2] % 2 == 0) {
+        return "bg-red-300";
+      }
+
+      return "bg-red-300";
+    }
+    return "bg-stone-300";
+  };
   const COLOR_PATTERN = (type: any, values: any) => {
     if (type === "oddEven") {
       return OddEvenType(values);
@@ -229,6 +404,34 @@ export default function Card({
       return sanColor(values);
     }
 
+    if (type === "oddoddv4") {
+      return OddODDV4Type(values);
+    }
+
+    if (type === "oddevv4") {
+      return OddEV4Type(values);
+    }
+    if (type === "evevv4") {
+      return evenEvenV4Type(values);
+    }
+    if (type === "evodv4") {
+      return evenOddV4Type(values);
+    }
+
+    if (type === "odododv4") {
+      return odododV4Type(values);
+    }
+
+    if (type === "evevevv4") {
+      return evevevV4Type(values);
+    }
+    if (type === "ododevv4") {
+      return ododevV4Type(values);
+    }
+    if (type === "evevodv4") {
+      return evevodV4Type(values);
+    }
+
     return "bg-stone-300";
   };
 
@@ -237,23 +440,54 @@ export default function Card({
       <div className="object-cover object-center w-full p-5 mx-auto rounded-lg bg-blue-50 border border-blue-10">
         <div>
           {clientRecord?.map((item: any, index: number) => (
-            <div
-              className={`flex items-center gap-1 my-1 rounded ${COLOR_PATTERN(
-                type,
-                item
-              )} p-2`}
-              key={`record-${index}`}
-            >
-              <p className="my-auto text-black">
-                <b>{index + 1} -</b>
-              </p>
-              {item.map((val: any, inx: number) => (
-                <BlockInput
-                  val={val}
-                  key={`value-${index}-${inx}`}
-                  index={inx}
-                />
-              ))}
+            <div key={index}>
+              {conditionCheckShow ? (
+                <>
+                  {item.length >= openBoxLimit && (
+                    <div
+                      className={`flex items-center gap-1 my-1 rounded ${COLOR_PATTERN(
+                        type,
+                        item
+                      )} p-2`}
+                      key={`record-${index}`}
+                    >
+                      <>
+                        <p className="my-auto text-black">
+                          <b>{index + 1} -</b>
+                        </p>
+                        {item.map((val: any, inx: number) => (
+                          <BlockInput
+                            val={val}
+                            key={`value-${index}-${inx}`}
+                            index={inx}
+                          />
+                        ))}
+                      </>
+                    </div>
+                  )}
+                </>
+              ) : (
+                <div
+                  className={`flex items-center gap-1 my-1 rounded ${COLOR_PATTERN(
+                    type,
+                    item
+                  )} p-2`}
+                  key={`record-${index}`}
+                >
+                  <>
+                    <p className="my-auto text-black">
+                      <b>{index + 1} -</b>
+                    </p>
+                    {item.map((val: any, inx: number) => (
+                      <BlockInput
+                        val={val}
+                        key={`value-${index}-${inx}`}
+                        index={inx}
+                      />
+                    ))}
+                  </>
+                </div>
+              )}
             </div>
           ))}
           {/* {Boolean(clientRecord.length) && (

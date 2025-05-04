@@ -60,7 +60,7 @@ export default function Home() {
     <div className="flex flex-col h-screen bg-white">
       <header className="p-6 bg-white shadow">
         <h4 className="text-xl font-bold text-[#9F0D0F] capitalize md:text-3xl text-center">
-          💲 Casino speed roulette 💲
+          💲 F4 💲
         </h4>
       </header>
 

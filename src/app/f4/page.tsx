@@ -6,29 +6,30 @@ import { useEffect, useRef, useState } from "react";
 
 export default function Home() {
   const tabSection = useRef<HTMLDivElement>(null);
-  const OEContainerRef = useRef<HTMLDivElement>(null);
   const EOContainerRef = useRef<HTMLDivElement>(null);
   const OOContainerRef = useRef<HTMLDivElement>(null);
   const EEContainerRef = useRef<HTMLDivElement>(null);
-  const NOEContainerRef = useRef<HTMLDivElement>(null);
-  const HLContainerRef = useRef<HTMLDivElement>(null);
-  const SANContainerRef = useRef<HTMLDivElement>(null);
+  const OO4ContainerRef = useRef<HTMLDivElement>(null);
+  const EE4ContainerRef = useRef<HTMLDivElement>(null);
+  const OOO4ContainerRef = useRef<HTMLDivElement>(null);
+  const EEE4ContainerRef = useRef<HTMLDivElement>(null);
+
   const [history, setHistory] = useState<any>([]);
   const [val, setVal] = useState("");
   const {
-    oddEvenPattern,
-    EvenOddPattern,
     oddOddPattern,
     evenEvenPattern,
-    normalOEPattern,
-    sanPattern,
+    oddOddv4Pattern,
+    evenEvenv4Pattern,
+    OOO4V4Pattern,
+    EEE4V4Pattern,
   } = useAlg();
-  const [OE, setOE] = useState([]);
-  const [EO, setEO] = useState([]);
   const [OO, setOO] = useState([]);
   const [EE, setEE] = useState([]);
-  const [NOE, setNOE] = useState([]);
-  const [SAN, setSAN] = useState([]);
+  const [OO4, setOO4] = useState([]);
+  const [EE4, setEE4] = useState([]);
+  const [OOO4, setOOO4] = useState([]);
+  const [EEE4, setEEE4] = useState([]);
 
   const valueEnter = (e: any) => {
     e.preventDefault();
@@ -36,21 +37,21 @@ export default function Home() {
       setHistory((prevHistory: any) => [
         ...prevHistory,
         {
-          OE: JSON.stringify(OE),
-          EO: JSON.stringify(EO),
           OO: JSON.stringify(OO),
           EE: JSON.stringify(EE),
-          NOE: JSON.stringify(NOE),
-          SAN: JSON.stringify(SAN),
+          OO4: JSON.stringify(OO4),
+          EE4: JSON.stringify(EE4),
+          OOO4: JSON.stringify(OOO4),
+          EEE4: JSON.stringify(EEE4),
         }, // Save current snapshot
       ]);
 
-      setOE(oddEvenPattern(OE, val));
-      setEO(EvenOddPattern(EO, val));
       setOO(oddOddPattern(OO, val));
       setEE(evenEvenPattern(EE, val));
-      setNOE(normalOEPattern(NOE, val));
-      setSAN(sanPattern(SAN, val));
+      setOO4(oddOddv4Pattern(OO4, val));
+      setEE4(evenEvenv4Pattern(EE4, val));
+      setOOO4(OOO4V4Pattern(OOO4, val));
+      setEEE4(EEE4V4Pattern(EEE4, val));
       setVal("");
     }
   };
@@ -74,68 +75,45 @@ export default function Home() {
       const lastState: any = history[history.length - 2]; // Get the last snapshot
 
       if (lastState) {
-        setOE((prv) => JSON.parse(lastState.OE));
-        setEO((prv) => JSON.parse(lastState.EO));
         setOO((prv) => JSON.parse(lastState.OO));
         setEE((prv) => JSON.parse(lastState.EE));
-        setNOE((prv) => JSON.parse(lastState.NOE));
-        setSAN((prv) => JSON.parse(lastState.SAN));
+        setOO4((prv) => JSON.parse(lastState.ODD4));
+        setEE4((prv) => JSON.parse(lastState.EE4));
+        setOOO4((prv) => JSON.parse(lastState.OOO4));
+        setEEE4((prv) => JSON.parse(lastState.EEE4));
       } else {
-        setOE((prv) => []);
-        setEO((prv) => []);
         setOO((prv) => []);
         setEE((prv) => []);
-        setNOE((prv) => []);
-        setSAN((prv) => []);
+        setOO4((prv) => []);
+        setEE4((prv) => []);
+        setOOO4((prv) => []);
+        setEEE4((prv) => []);
       }
     }
   };
   useEffect(() => {
-    OEContainerRef.current?.scrollIntoView({ behavior: "smooth" });
     EOContainerRef.current?.scrollIntoView({ behavior: "smooth" });
     EEContainerRef.current?.scrollIntoView({ behavior: "smooth" });
-    OOContainerRef.current?.scrollIntoView({ behavior: "smooth" });
-    NOEContainerRef.current?.scrollIntoView({ behavior: "smooth" });
-    HLContainerRef.current?.scrollIntoView({ behavior: "smooth" });
-    SANContainerRef.current?.scrollIntoView({ behavior: "smooth" });
+    OO4ContainerRef.current?.scrollIntoView({ behavior: "smooth" });
+    EE4ContainerRef.current?.scrollIntoView({ behavior: "smooth" });
+    OOO4ContainerRef.current?.scrollIntoView({ behavior: "smooth" });
+    EEE4ContainerRef.current?.scrollIntoView({ behavior: "smooth" });
   }, [val]);
 
   return (
     <div className="flex flex-col h-screen bg-white">
       <header className="p-6 bg-white shadow">
         <h4 className="text-xl font-bold text-[#9F0D0F] capitalize md:text-3xl text-center">
-          💲 f4 💲
+          💲 F4 💲
         </h4>
       </header>
 
       {/* Scrollable Grid Section */}
       <main className="flex-1 overflow-y-auto p-6">
         <div className="grid gap-1 sm:grid-cols-2 lg:grid-cols-7 xl:grid-cols-7">
-          <div className="h-[calc(80vh-5rem)] overflow-y-auto border border-gray-300 rounded shadow p-4">
+          {/* <div className="h-[calc(80vh-5rem)] overflow-y-auto border border-gray-300 rounded shadow p-4">
             <Card
-              title={"ODD-EVEN"}
-              record={OE}
-              type="oddEven"
-              handleUndo={() => {
-                undoOptionOE(OE, setOE);
-              }}
-            />
-            <div ref={OEContainerRef} className="h-1 w-full bg-transparent" />
-          </div>
-          <div className="h-[calc(80vh-5rem)] overflow-y-auto border border-gray-300 rounded shadow p-4">
-            <Card
-              title={"EVEN-ODD"}
-              record={EO}
-              type="evenOdd"
-              handleUndo={() => {
-                undoOptionOE(EO, setEO);
-              }}
-            />
-            <div ref={EOContainerRef} className="h-1 w-full bg-transparent" />
-          </div>
-          <div className="h-[calc(80vh-5rem)] overflow-y-auto border border-gray-300 rounded shadow p-4">
-            <Card
-              title={"ODD-ODD"}
+              title={"ODD-EVEN-ODD"}
               record={OO}
               type="oddOdd"
               handleUndo={() => {
@@ -146,7 +124,7 @@ export default function Home() {
           </div>
           <div className="h-[calc(80vh-5rem)] overflow-y-auto border border-gray-300 rounded shadow p-4">
             <Card
-              title={"EVEN-EVEN"}
+              title={"EVEN-ODD-EVEN"}
               record={EE}
               type="evenEven"
               handleUndo={() => {
@@ -154,8 +132,113 @@ export default function Home() {
               }}
             />
             <div ref={EEContainerRef} className="h-1 w-full bg-transparent" />
+          </div> */}
+
+          {/* v4 */}
+          <div className="h-[calc(80vh-5rem)] overflow-y-auto border border-gray-300 rounded shadow p-4">
+            <Card
+              title={"ODD-ODD4"}
+              record={OO4}
+              type="oddoddv4"
+              handleUndo={() => {
+                undoOptionOE(OO4, setOO4);
+              }}
+            />
+            <div ref={OO4ContainerRef} className="h-1 w-full bg-transparent" />
+          </div>
+
+          <div className="h-[calc(80vh-5rem)] overflow-y-auto border border-gray-300 rounded shadow p-4">
+            <Card
+              title={"OD-OD-OD"}
+              record={OOO4}
+              type="odododv4"
+              conditionCheckShow={true}
+              openBoxLimit={2}
+              handleUndo={() => {
+                undoOptionOE(OOO4, setOOO4);
+              }}
+            />
+            <div ref={OOO4ContainerRef} className="h-1 w-full bg-transparent" />
+          </div>
+
+          <div className="h-[calc(80vh-5rem)] overflow-y-auto border border-gray-300 rounded shadow p-4">
+            <Card
+              title={"OD-OD-EV"}
+              record={OOO4}
+              type="ododevv4"
+              conditionCheckShow={true}
+              openBoxLimit={2}
+              handleUndo={() => {
+                undoOptionOE(OOO4, setOOO4);
+              }}
+            />
+            <div ref={OOO4ContainerRef} className="h-1 w-full bg-transparent" />
+          </div>
+
+          <div className="h-[calc(80vh-5rem)] overflow-y-auto border border-gray-300 rounded shadow p-4">
+            <Card
+              title={"EV-EV4"}
+              record={EE4}
+              type="evevv4"
+              handleUndo={() => {
+                undoOptionOE(EE4, setEE4);
+              }}
+            />
+            <div ref={EE4ContainerRef} className="h-1 w-full bg-transparent" />
+          </div>
+
+          <div className="h-[calc(80vh-5rem)] overflow-y-auto border border-gray-300 rounded shadow p-4">
+            <Card
+              title={"EV-EV-EV"}
+              record={EEE4}
+              type="evevevv4"
+              conditionCheckShow={true}
+              openBoxLimit={2}
+              handleUndo={() => {
+                undoOptionOE(EEE4, setEEE4);
+              }}
+            />
+            <div ref={EEE4ContainerRef} className="h-1 w-full bg-transparent" />
           </div>
           <div className="h-[calc(80vh-5rem)] overflow-y-auto border border-gray-300 rounded shadow p-4">
+            <Card
+              title={"EV-EV-OD"}
+              record={EEE4}
+              type="evevodv4"
+              conditionCheckShow={true}
+              openBoxLimit={2}
+              handleUndo={() => {
+                undoOptionOE(EEE4, setEEE4);
+              }}
+            />
+            <div ref={EEE4ContainerRef} className="h-1 w-full bg-transparent" />
+          </div>
+
+          <div className="h-[calc(80vh-5rem)] overflow-y-auto border border-gray-300 rounded shadow p-4">
+            <Card
+              title={"ODD-EV4"}
+              record={OO4}
+              type="oddevv4"
+              handleUndo={() => {
+                undoOptionOE(OO4, setOO4);
+              }}
+            />
+            <div ref={OO4ContainerRef} className="h-1 w-full bg-transparent" />
+          </div>
+
+          <div className="h-[calc(80vh-5rem)] overflow-y-auto border border-gray-300 rounded shadow p-4">
+            <Card
+              title={"EV-ODD4"}
+              record={EE4}
+              type="evodv4"
+              handleUndo={() => {
+                undoOptionOE(EE4, setEE4);
+              }}
+            />
+            <div ref={EE4ContainerRef} className="h-1 w-full bg-transparent" />
+          </div>
+
+          {/* <div className="h-[calc(80vh-5rem)] overflow-y-auto border border-gray-300 rounded shadow p-4">
             <Card
               title={"STD-OE"}
               record={NOE}
@@ -168,18 +251,6 @@ export default function Home() {
           </div>
           <div className="h-[calc(80vh-5rem)] overflow-y-auto border border-gray-300 rounded shadow p-4">
             <Card
-              title={"HL"}
-              record={NOE}
-              type="highLow"
-              handleUndo={() => {
-                undoOptionOE(NOE, setNOE);
-              }}
-            />
-            <div ref={HLContainerRef} className="h-1 w-full bg-transparent" />
-          </div>
-
-          <div className="h-[calc(80vh-5rem)] overflow-y-auto border border-gray-300 rounded shadow p-4">
-            <Card
               title={"SAN"}
               record={SAN}
               type="SAN"
@@ -188,7 +259,7 @@ export default function Home() {
               }}
             />
             <div ref={SANContainerRef} className="h-1 w-full bg-transparent" />
-          </div>
+          </div> */}
         </div>
       </main>
 
