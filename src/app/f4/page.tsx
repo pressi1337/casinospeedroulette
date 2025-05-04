@@ -9,10 +9,15 @@ export default function Home() {
   const EOContainerRef = useRef<HTMLDivElement>(null);
   const OOContainerRef = useRef<HTMLDivElement>(null);
   const EEContainerRef = useRef<HTMLDivElement>(null);
+
   const OO4ContainerRef = useRef<HTMLDivElement>(null);
+  const OO4dupContainerRef = useRef<HTMLDivElement>(null);
   const EE4ContainerRef = useRef<HTMLDivElement>(null);
   const OOO4ContainerRef = useRef<HTMLDivElement>(null);
+  const OOO4dupContainerRef = useRef<HTMLDivElement>(null);
   const EEE4ContainerRef = useRef<HTMLDivElement>(null);
+  const EEE4dupContainerRef = useRef<HTMLDivElement>(null);
+  const EE4dupContainerRef = useRef<HTMLDivElement>(null);
 
   const [history, setHistory] = useState<any>([]);
   const [val, setVal] = useState("");
@@ -77,7 +82,7 @@ export default function Home() {
       if (lastState) {
         setOO((prv) => JSON.parse(lastState.OO));
         setEE((prv) => JSON.parse(lastState.EE));
-        setOO4((prv) => JSON.parse(lastState.ODD4));
+        setOO4((prv) => JSON.parse(lastState.OO4));
         setEE4((prv) => JSON.parse(lastState.EE4));
         setOOO4((prv) => JSON.parse(lastState.OOO4));
         setEEE4((prv) => JSON.parse(lastState.EEE4));
@@ -97,7 +102,11 @@ export default function Home() {
     OO4ContainerRef.current?.scrollIntoView({ behavior: "smooth" });
     EE4ContainerRef.current?.scrollIntoView({ behavior: "smooth" });
     OOO4ContainerRef.current?.scrollIntoView({ behavior: "smooth" });
+    OOO4dupContainerRef.current?.scrollIntoView({ behavior: "smooth" });
+    OO4dupContainerRef.current?.scrollIntoView({ behavior: "smooth" });
     EEE4ContainerRef.current?.scrollIntoView({ behavior: "smooth" });
+    EEE4dupContainerRef.current?.scrollIntoView({ behavior: "smooth" });
+    EE4dupContainerRef.current?.scrollIntoView({ behavior: "smooth" });
   }, [val]);
 
   return (
@@ -111,31 +120,8 @@ export default function Home() {
       {/* Scrollable Grid Section */}
       <main className="flex-1 overflow-y-auto p-6">
         <div className="grid gap-1 sm:grid-cols-2 lg:grid-cols-7 xl:grid-cols-7">
-          {/* <div className="h-[calc(80vh-5rem)] overflow-y-auto border border-gray-300 rounded shadow p-4">
-            <Card
-              title={"ODD-EVEN-ODD"}
-              record={OO}
-              type="oddOdd"
-              handleUndo={() => {
-                undoOptionOE(OO, setOO);
-              }}
-            />
-            <div ref={OOContainerRef} className="h-1 w-full bg-transparent" />
-          </div>
-          <div className="h-[calc(80vh-5rem)] overflow-y-auto border border-gray-300 rounded shadow p-4">
-            <Card
-              title={"EVEN-ODD-EVEN"}
-              record={EE}
-              type="evenEven"
-              handleUndo={() => {
-                undoOptionOE(EE, setEE);
-              }}
-            />
-            <div ref={EEContainerRef} className="h-1 w-full bg-transparent" />
-          </div> */}
-
           {/* v4 */}
-          <div className="h-[calc(80vh-5rem)] overflow-y-auto border border-gray-300 rounded shadow p-4">
+          <div className="h-[calc(60vh-5rem)] overflow-y-auto border border-gray-300 rounded shadow p-4">
             <Card
               title={"ODD-ODD4"}
               record={OO4}
@@ -147,7 +133,7 @@ export default function Home() {
             <div ref={OO4ContainerRef} className="h-1 w-full bg-transparent" />
           </div>
 
-          <div className="h-[calc(80vh-5rem)] overflow-y-auto border border-gray-300 rounded shadow p-4">
+          <div className="h-[calc(60vh-5rem)] overflow-y-auto border border-gray-300 rounded shadow p-4">
             <Card
               title={"OD-OD-OD"}
               record={OOO4}
@@ -158,10 +144,13 @@ export default function Home() {
                 undoOptionOE(OOO4, setOOO4);
               }}
             />
-            <div ref={OOO4ContainerRef} className="h-1 w-full bg-transparent" />
+            <div
+              ref={OOO4dupContainerRef}
+              className="h-1 w-full bg-transparent"
+            />
           </div>
 
-          <div className="h-[calc(80vh-5rem)] overflow-y-auto border border-gray-300 rounded shadow p-4">
+          <div className="h-[calc(60vh-5rem)] overflow-y-auto border border-gray-300 rounded shadow p-4">
             <Card
               title={"OD-OD-EV"}
               record={OOO4}
@@ -175,7 +164,7 @@ export default function Home() {
             <div ref={OOO4ContainerRef} className="h-1 w-full bg-transparent" />
           </div>
 
-          <div className="h-[calc(80vh-5rem)] overflow-y-auto border border-gray-300 rounded shadow p-4">
+          <div className="h-[calc(60vh-5rem)] overflow-y-auto border border-gray-300 rounded shadow p-4">
             <Card
               title={"EV-EV4"}
               record={EE4}
@@ -187,7 +176,7 @@ export default function Home() {
             <div ref={EE4ContainerRef} className="h-1 w-full bg-transparent" />
           </div>
 
-          <div className="h-[calc(80vh-5rem)] overflow-y-auto border border-gray-300 rounded shadow p-4">
+          <div className="h-[calc(60vh-5rem)] overflow-y-auto border border-gray-300 rounded shadow p-4">
             <Card
               title={"EV-EV-EV"}
               record={EEE4}
@@ -198,9 +187,12 @@ export default function Home() {
                 undoOptionOE(EEE4, setEEE4);
               }}
             />
-            <div ref={EEE4ContainerRef} className="h-1 w-full bg-transparent" />
+            <div
+              ref={EEE4dupContainerRef}
+              className="h-1 w-full bg-transparent"
+            />
           </div>
-          <div className="h-[calc(80vh-5rem)] overflow-y-auto border border-gray-300 rounded shadow p-4">
+          <div className="h-[calc(60vh-5rem)] overflow-y-auto border border-gray-300 rounded shadow p-4">
             <Card
               title={"EV-EV-OD"}
               record={EEE4}
@@ -214,7 +206,7 @@ export default function Home() {
             <div ref={EEE4ContainerRef} className="h-1 w-full bg-transparent" />
           </div>
 
-          <div className="h-[calc(80vh-5rem)] overflow-y-auto border border-gray-300 rounded shadow p-4">
+          <div className="h-[calc(60vh-5rem)] overflow-y-auto border border-gray-300 rounded shadow p-4">
             <Card
               title={"ODD-EV4"}
               record={OO4}
@@ -223,10 +215,13 @@ export default function Home() {
                 undoOptionOE(OO4, setOO4);
               }}
             />
-            <div ref={OO4ContainerRef} className="h-1 w-full bg-transparent" />
+            <div
+              ref={OO4dupContainerRef}
+              className="h-1 w-full bg-transparent"
+            />
           </div>
 
-          <div className="h-[calc(80vh-5rem)] overflow-y-auto border border-gray-300 rounded shadow p-4">
+          <div className="h-[calc(60vh-5rem)] overflow-y-auto border border-gray-300 rounded shadow p-4">
             <Card
               title={"EV-ODD4"}
               record={EE4}
@@ -235,10 +230,13 @@ export default function Home() {
                 undoOptionOE(EE4, setEE4);
               }}
             />
-            <div ref={EE4ContainerRef} className="h-1 w-full bg-transparent" />
+            <div
+              ref={EE4dupContainerRef}
+              className="h-1 w-full bg-transparent"
+            />
           </div>
 
-          {/* <div className="h-[calc(80vh-5rem)] overflow-y-auto border border-gray-300 rounded shadow p-4">
+          {/* <div className="h-[calc(60vh-5rem)] overflow-y-auto border border-gray-300 rounded shadow p-4">
             <Card
               title={"STD-OE"}
               record={NOE}
@@ -249,7 +247,7 @@ export default function Home() {
             />
             <div ref={NOEContainerRef} className="h-1 w-full bg-transparent" />
           </div>
-          <div className="h-[calc(80vh-5rem)] overflow-y-auto border border-gray-300 rounded shadow p-4">
+          <div className="h-[calc(60vh-5rem)] overflow-y-auto border border-gray-300 rounded shadow p-4">
             <Card
               title={"SAN"}
               record={SAN}
