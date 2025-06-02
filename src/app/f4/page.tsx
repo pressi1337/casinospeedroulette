@@ -18,6 +18,12 @@ export default function Home() {
   const EEE4ContainerRef = useRef<HTMLDivElement>(null);
   const EEE4dupContainerRef = useRef<HTMLDivElement>(null);
   const EE4dupContainerRef = useRef<HTMLDivElement>(null);
+  const OEOCContainerRef = useRef<HTMLDivElement>(null);
+  const EOECContainerRef = useRef<HTMLDivElement>(null);
+  const B1ContainerRef = useRef<HTMLDivElement>(null);
+  const OEContainerRef = useRef<HTMLDivElement>(null);
+  const SANContainerRef = useRef<HTMLDivElement>(null);
+  const NOEContainerRef = useRef<HTMLDivElement>(null);
 
   const [history, setHistory] = useState<any>([]);
   const [val, setVal] = useState("");
@@ -28,6 +34,12 @@ export default function Home() {
     evenEvenv4Pattern,
     OOO4V4Pattern,
     EEE4V4Pattern,
+    oddEvenOddClose,
+    evenOddEvenClose,
+    B1Close,
+    oddEvenPattern,
+    normalOEPattern,
+    sanPattern,
   } = useAlg();
   const [OO, setOO] = useState([]);
   const [EE, setEE] = useState([]);
@@ -35,6 +47,12 @@ export default function Home() {
   const [EE4, setEE4] = useState([]);
   const [OOO4, setOOO4] = useState([]);
   const [EEE4, setEEE4] = useState([]);
+  const [OEOC, setOEOC] = useState([]);
+  const [EOEC, setEOEC] = useState([]);
+  const [B1, setB1] = useState([]);
+  const [OE, setOE] = useState([]);
+  const [NOE, setNOE] = useState([]);
+  const [SAN, setSAN] = useState([]);
 
   const valueEnter = (e: any) => {
     e.preventDefault();
@@ -48,6 +66,12 @@ export default function Home() {
           EE4: JSON.stringify(EE4),
           OOO4: JSON.stringify(OOO4),
           EEE4: JSON.stringify(EEE4),
+          OEOC: JSON.stringify(OEOC),
+          EOEC: JSON.stringify(EOEC),
+          B1: JSON.stringify(B1),
+          OE: JSON.stringify(OE),
+          NOE: JSON.stringify(NOE),
+          SAN: JSON.stringify(SAN),
         }, // Save current snapshot
       ]);
 
@@ -57,6 +81,12 @@ export default function Home() {
       setEE4(evenEvenv4Pattern(EE4, val));
       setOOO4(OOO4V4Pattern(OOO4, val));
       setEEE4(EEE4V4Pattern(EEE4, val));
+      setOEOC(oddEvenOddClose(OEOC, val));
+      setEOEC(evenOddEvenClose(EOEC, val));
+      setOE(oddEvenPattern(OE, val));
+      setB1(B1Close(B1, val));
+      setNOE(normalOEPattern(NOE, val));
+      setSAN(sanPattern(SAN, val));
       setVal("");
     }
   };
@@ -86,6 +116,12 @@ export default function Home() {
         setEE4((prv) => JSON.parse(lastState.EE4));
         setOOO4((prv) => JSON.parse(lastState.OOO4));
         setEEE4((prv) => JSON.parse(lastState.EEE4));
+        setOEOC((prv) => JSON.parse(lastState.OEOC));
+        setEOEC((prv) => JSON.parse(lastState.EOEC));
+        setB1((prv) => JSON.parse(lastState.B1));
+        setOE((prv) => JSON.parse(lastState.OE));
+        setNOE((prv) => JSON.parse(lastState.NOE));
+        setSAN((prv) => JSON.parse(lastState.SAN));
       } else {
         setOO((prv) => []);
         setEE((prv) => []);
@@ -93,6 +129,11 @@ export default function Home() {
         setEE4((prv) => []);
         setOOO4((prv) => []);
         setEEE4((prv) => []);
+        setOEOC((prv) => []);
+        setB1((prv) => []);
+        setOE((prv) => []);
+        setNOE((prv) => []);
+        setSAN((prv) => []);
       }
     }
   };
@@ -107,6 +148,11 @@ export default function Home() {
     EEE4ContainerRef.current?.scrollIntoView({ behavior: "smooth" });
     EEE4dupContainerRef.current?.scrollIntoView({ behavior: "smooth" });
     EE4dupContainerRef.current?.scrollIntoView({ behavior: "smooth" });
+    OEOCContainerRef.current?.scrollIntoView({ behavior: "smooth" });
+    EOECContainerRef.current?.scrollIntoView({ behavior: "smooth" });
+    B1ContainerRef.current?.scrollIntoView({ behavior: "smooth" });
+    SANContainerRef.current?.scrollIntoView({ behavior: "smooth" });
+    NOEContainerRef.current?.scrollIntoView({ behavior: "smooth" });
   }, [val]);
 
   return (
@@ -235,8 +281,52 @@ export default function Home() {
               className="h-1 w-full bg-transparent"
             />
           </div>
+          <div className="h-[calc(60vh-5rem)] overflow-y-auto border border-gray-300 rounded shadow p-4">
+            <Card
+              title={"OEOC"}
+              record={OEOC}
+              type="oeoc"
+              handleUndo={() => {
+                undoOptionOE(OEOC, setOEOC);
+              }}
+            />
+            <div ref={OEOCContainerRef} className="h-1 w-full bg-transparent" />
+          </div>
+          <div className="h-[calc(60vh-5rem)] overflow-y-auto border border-gray-300 rounded shadow p-4">
+            <Card
+              title={"EOEC"}
+              record={EOEC}
+              type="eoec"
+              handleUndo={() => {
+                undoOptionOE(EOEC, setEOEC);
+              }}
+            />
+            <div ref={EOECContainerRef} className="h-1 w-full bg-transparent" />
+          </div>
+          <div className="h-[calc(60vh-5rem)] overflow-y-auto border border-gray-300 rounded shadow p-4">
+            <Card
+              title={"B1"}
+              record={B1}
+              type="b1"
+              handleUndo={() => {
+                undoOptionOE(B1, setB1);
+              }}
+            />
+            <div ref={B1ContainerRef} className="h-1 w-full bg-transparent" />
+          </div>
+          <div className="h-[calc(60vh-5rem)] overflow-y-auto border border-gray-300 rounded shadow p-4">
+            <Card
+              title={"ODD-EVEN1"}
+              record={OE}
+              type="oddEven"
+              handleUndo={() => {
+                undoOptionOE(OE, setOE);
+              }}
+            />
+            <div ref={OEContainerRef} className="h-1 w-full bg-transparent" />
+          </div>
 
-          {/* <div className="h-[calc(60vh-5rem)] overflow-y-auto border border-gray-300 rounded shadow p-4">
+          <div className="h-[calc(60vh-5rem)] overflow-y-auto border border-gray-300 rounded shadow p-4">
             <Card
               title={"STD-OE"}
               record={NOE}
@@ -257,7 +347,7 @@ export default function Home() {
               }}
             />
             <div ref={SANContainerRef} className="h-1 w-full bg-transparent" />
-          </div> */}
+          </div>
         </div>
       </main>
 

@@ -670,6 +670,292 @@ const useAlg = () => {
     }
   };
 
+  const oddEvenOddClose = (prevOddEven: any, value: any) => {
+    let OO: any = prevOddEven;
+    if (!OO.length) {
+      if (oddOrEven(value).type == "odd") {
+        OO.push([value]);
+      }
+      return OO;
+    } else {
+      let temp: any = {
+        type: undefined,
+        value: undefined,
+        index: undefined,
+      };
+
+      let lastSubArray = [OO[OO.length - 1]];
+      lastSubArray.map((arrayChunk, index) => {
+        if (arrayChunk.length === 1) {
+          temp = {
+            type: "current",
+            value: value,
+            index: index,
+          };
+        }
+
+        if (arrayChunk.length === 2) {
+          if (oddOrEven(arrayChunk[1]).type == "zero") {
+            if (oddOrEven(value).type == "odd") {
+              temp = {
+                type: "newSet",
+                value: value,
+              };
+            }
+          }
+
+          if (
+            oddOrEven(arrayChunk[1]).type == "even" ||
+            oddOrEven(arrayChunk[1]).type == "odd"
+          ) {
+            if (oddOrEven(value).type == "odd") {
+              temp = {
+                type: "closeNdOpenNewSet",
+                value: value,
+              };
+            }
+            if (
+              oddOrEven(value).type == "even" ||
+              oddOrEven(value).type == "zero"
+            ) {
+              temp = {
+                type: "current",
+                value: value,
+              };
+            }
+          }
+        }
+
+        if (arrayChunk.length === 3) {
+          if (
+            oddOrEven(arrayChunk[2]).type == "odd" ||
+            oddOrEven(arrayChunk[2]).type == "even" ||
+            oddOrEven(arrayChunk[2]).type == "zero"
+          ) {
+            if (oddOrEven(value).type == "odd") {
+              temp = {
+                type: "newSet",
+                value: value,
+              };
+            }
+          }
+        }
+      });
+
+      if (temp.type == "newSet") {
+        OO.push([value]);
+      } else if (temp.type == "current") {
+        OO[OO.length - 1].push(temp.value);
+      } else if (temp.type == "closeNdOpenNewSet") {
+        OO[OO.length - 1].push(temp.value);
+        OO.push([value]);
+      }
+
+      return OO;
+    }
+  };
+
+  const evenOddEvenClose = (prevOddEven: any, value: any) => {
+    let OO: any = prevOddEven;
+    if (!OO.length) {
+      if (oddOrEven(value).type == "even") {
+        OO.push([value]);
+      }
+      return OO;
+    } else {
+      let temp: any = {
+        type: undefined,
+        value: undefined,
+        index: undefined,
+      };
+
+      let lastSubArray = [OO[OO.length - 1]];
+      lastSubArray.map((arrayChunk, index) => {
+        if (arrayChunk.length === 1) {
+          temp = {
+            type: "current",
+            value: value,
+            index: index,
+          };
+        }
+
+        if (arrayChunk.length === 2) {
+          if (oddOrEven(arrayChunk[1]).type == "zero") {
+            if (oddOrEven(value).type == "even") {
+              temp = {
+                type: "newSet",
+                value: value,
+              };
+            }
+          }
+
+          if (
+            oddOrEven(arrayChunk[1]).type == "even" ||
+            oddOrEven(arrayChunk[1]).type == "odd"
+          ) {
+            if (oddOrEven(value).type == "even") {
+              temp = {
+                type: "closeNdOpenNewSet",
+                value: value,
+              };
+            }
+            if (
+              oddOrEven(value).type == "odd" ||
+              oddOrEven(value).type == "zero"
+            ) {
+              temp = {
+                type: "current",
+                value: value,
+              };
+            }
+          }
+        }
+
+        if (arrayChunk.length === 3) {
+          if (
+            oddOrEven(arrayChunk[2]).type == "odd" ||
+            oddOrEven(arrayChunk[2]).type == "even" ||
+            oddOrEven(arrayChunk[2]).type == "zero"
+          ) {
+            if (oddOrEven(value).type == "even") {
+              temp = {
+                type: "newSet",
+                value: value,
+              };
+            }
+          }
+        }
+      });
+
+      if (temp.type == "newSet") {
+        OO.push([value]);
+      } else if (temp.type == "current") {
+        OO[OO.length - 1].push(temp.value);
+      } else if (temp.type == "closeNdOpenNewSet") {
+        OO[OO.length - 1].push(temp.value);
+        OO.push([value]);
+      }
+
+      return OO;
+    }
+  };
+
+  const B1Close = (prevOddEven: any, value: any) => {
+    let OO: any = prevOddEven;
+    if (!OO.length) {
+      if (oddOrEven(value).type == "even" || oddOrEven(value).type == "odd") {
+        OO.push([value]);
+      }
+      return OO;
+    } else {
+      let temp: any = {
+        type: undefined,
+        value: undefined,
+        index: undefined,
+      };
+
+      let lastSubArray = [OO[OO.length - 1]];
+      lastSubArray.map((arrayChunk, index) => {
+        if (arrayChunk.length === 1) {
+          temp = {
+            type: "current",
+            value: value,
+            index: index,
+          };
+        }
+
+        if (arrayChunk.length === 2) {
+          if (oddOrEven(value).type == "zero") {
+            temp = {
+              type: "current",
+              value: value,
+            };
+          } else {
+            if (oddOrEven(arrayChunk[1]).type == "zero") {
+              if (
+                oddOrEven(value).type == "even" ||
+                oddOrEven(value).type == "odd"
+              ) {
+                temp = {
+                  type: "newSet",
+                  value: value,
+                };
+              }
+            } else if (
+              oddOrEven(arrayChunk[0]).type == "odd" &&
+              oddOrEven(arrayChunk[1]).type == "odd"
+            ) {
+              temp = {
+                type: "newSet",
+                value: value,
+              };
+            } else if (
+              oddOrEven(arrayChunk[0]).type == "even" &&
+              oddOrEven(arrayChunk[1]).type == "even"
+            ) {
+              temp = {
+                type: "newSet",
+                value: value,
+              };
+            } else if (
+              oddOrEven(arrayChunk[1]).type == "even" &&
+              oddOrEven(value).type == "even"
+            ) {
+              temp = {
+                type: "closeNdOpenNewSet",
+                value: value,
+              };
+            } else if (
+              oddOrEven(arrayChunk[1]).type == "odd" &&
+              oddOrEven(value).type == "odd"
+            ) {
+              temp = {
+                type: "closeNdOpenNewSet",
+                value: value,
+              };
+            } else if (
+              oddOrEven(arrayChunk[1]).type == "even" ||
+              oddOrEven(arrayChunk[1]).type == "odd"
+            ) {
+              temp = {
+                type: "current",
+                value: value,
+              };
+            }
+          }
+        }
+
+        if (arrayChunk.length === 3) {
+          if (
+            oddOrEven(arrayChunk[2]).type == "odd" ||
+            oddOrEven(arrayChunk[2]).type == "even" ||
+            oddOrEven(arrayChunk[2]).type == "zero"
+          ) {
+            if (
+              oddOrEven(value).type == "even" ||
+              oddOrEven(value).type == "odd"
+            ) {
+              temp = {
+                type: "newSet",
+                value: value,
+              };
+            }
+          }
+        }
+      });
+
+      if (temp.type == "newSet") {
+        OO.push([value]);
+      } else if (temp.type == "current") {
+        OO[OO.length - 1].push(temp.value);
+      } else if (temp.type == "closeNdOpenNewSet") {
+        OO[OO.length - 1].push(temp.value);
+        OO.push([value]);
+      }
+
+      return OO;
+    }
+  };
   return {
     oddEven,
     evenOdd,
@@ -683,6 +969,9 @@ const useAlg = () => {
     evenEvenv4Pattern,
     OOO4V4Pattern,
     EEE4V4Pattern,
+    oddEvenOddClose,
+    evenOddEvenClose,
+    B1Close,
   };
 };
 

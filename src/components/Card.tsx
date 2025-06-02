@@ -379,6 +379,65 @@ export default function Card({
     }
     return "bg-stone-300";
   };
+
+  const OEOCType = (values: any) => {
+    if (values.length == 1) {
+      return "bg-stone-300";
+    }
+    if (values.length == 2) {
+      return "bg-red-300";
+    }
+    if (values.length == 3) {
+      if (values[0] % 2 == 1 && values[1] % 2 == 1 && values[2] % 2 == 0) {
+        return "bg-green-300";
+      }
+
+      return "bg-red-300";
+    }
+    return "bg-stone-300";
+  };
+
+  const EOECType = (values: any) => {
+    if (values.length == 1) {
+      return "bg-stone-300";
+    }
+    if (values.length == 2) {
+      return "bg-red-300";
+    }
+    if (values.length == 3) {
+      if (values[0] % 2 == 0 && values[1] % 2 == 0 && values[2] % 2 == 1) {
+        return "bg-green-300";
+      }
+
+      return "bg-red-300";
+    }
+    return "bg-stone-300";
+  };
+
+  const B1 = (values: any) => {
+    if (values.length == 1) {
+      return "bg-stone-300";
+    }
+    if (values.length == 2) {
+      if (values[0] % 2 == 0 && values[1] % 2 == 0) {
+        return "bg-green-300";
+      }
+      if (values[0] % 2 == 1 && values[1] % 2 == 1) {
+        return "bg-green-300";
+      }
+    }
+    if (values.length == 3) {
+      if (values[0] % 2 == 1 && values[1] % 2 == 0 && values[2] % 2 == 1) {
+        return "bg-green-300";
+      }
+      if (values[0] % 2 == 0 && values[1] % 2 == 1 && values[2] % 2 == 0) {
+        return "bg-green-300";
+      }
+
+      return "bg-red-300";
+    }
+    return "bg-stone-300";
+  };
   const COLOR_PATTERN = (type: any, values: any) => {
     if (type === "oddEven") {
       return OddEvenType(values);
@@ -430,6 +489,18 @@ export default function Card({
     }
     if (type === "evevodv4") {
       return evevodV4Type(values);
+    }
+
+    if (type === "oeoc") {
+      return OEOCType(values);
+    }
+
+    if (type === "eoec") {
+      return EOECType(values);
+    }
+
+    if (type === "b1") {
+      return B1(values);
     }
 
     return "bg-stone-300";
