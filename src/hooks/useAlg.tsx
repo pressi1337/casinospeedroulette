@@ -1,6 +1,12 @@
 "use client";
 import { useState } from "react";
 
+const BlackNumber = [
+  2, 4, 6, 8, 10, 11, 13, 15, 17, 20, 22, 24, 26, 28, 29, 31, 33, 35,
+];
+const RedNumber = [
+  1, 3, 5, 7, 9, 12, 14, 16, 18, 19, 21, 23, 25, 27, 30, 32, 34, 36,
+];
 const useAlg = () => {
   const [oddEven, setOddEven] = useState<any>([]);
   const [evenOdd, setEvenOdd] = useState<any>([]);
@@ -23,7 +29,50 @@ const useAlg = () => {
       };
     }
   };
+  const BlackRed = (value: any) => {
+    if (value == 0) {
+      return {
+        type: "zero",
+        value,
+      };
+    } else if (RedNumber.includes(parseInt(value))) {
+      return {
+        type: "even",
+        type_2: "black",
+        value,
+      };
+    } else {
+      return {
+        type: "odd",
+        type_2: "red",
+        value,
+      };
+    }
+  };
 
+  const HighLow = (value: any) => {
+    if (value == 0) {
+      return {
+        type: "zero",
+        value,
+        type_c: "even",
+      };
+    } else if (value >= 18) {
+      return {
+        type: "even",
+        type_2: "low",
+        type_c: "even",
+        value,
+      };
+    } else {
+      return {
+        type: "odd",
+        type_2: "high",
+        type_c: "odd",
+        value,
+      };
+    }
+  };
   const oddEvenPattern = (prevOddEven: any, value: any) => {
     let OE: any = prevOddEven;
 
@@ -956,6 +1005,236 @@ const useAlg = () => {
       return OO;
     }
   };
+
+  const B1CloseHL = (prevOddEven: any, value: any) => {
+    let OO: any = prevOddEven;
+    if (!OO.length) {
+      if (HighLow(value).type == "even" || HighLow(value).type == "odd") {
+        OO.push([value]);
+      }
+      return OO;
+    } else {
+      let temp: any = {
+        type: undefined,
+        value: undefined,
+        index: undefined,
+      };
+
+      let lastSubArray = [OO[OO.length - 1]];
+      lastSubArray.map((arrayChunk, index) => {
+        if (arrayChunk.length === 1) {
+          temp = {
+            type: "current",
+            value: value,
+            index: index,
+          };
+        }
+
+        if (arrayChunk.length === 2) {
+          if (HighLow(value).type == "zero") {
+            temp = {
+              type: "current",
+              value: value,
+            };
+          } else {
+            if (HighLow(arrayChunk[1]).type == "zero") {
+              if (
+                HighLow(value).type == "even" ||
+                HighLow(value).type == "odd"
+              ) {
+                temp = {
+                  type: "newSet",
+                  value: value,
+                };
+              }
+            } else if (
+              HighLow(arrayChunk[0]).type == "odd" &&
+              HighLow(arrayChunk[1]).type == "odd"
+            ) {
+              temp = {
+                type: "newSet",
+                value: value,
+              };
+            } else if (
+              HighLow(arrayChunk[0]).type == "even" &&
+              HighLow(arrayChunk[1]).type == "even"
+            ) {
+              temp = {
+                type: "newSet",
+                value: value,
+              };
+            } else if (
+              HighLow(arrayChunk[1]).type == "even" &&
+              HighLow(value).type == "even"
+            ) {
+              temp = {
+                type: "closeNdOpenNewSet",
+                value: value,
+              };
+            } else if (
+              HighLow(arrayChunk[1]).type == "odd" &&
+              HighLow(value).type == "odd"
+            ) {
+              temp = {
+                type: "closeNdOpenNewSet",
+                value: value,
+              };
+            } else if (
+              HighLow(arrayChunk[1]).type == "even" ||
+              HighLow(arrayChunk[1]).type == "odd"
+            ) {
+              temp = {
+                type: "current",
+                value: value,
+              };
+            }
+          }
+        }
+
+        if (arrayChunk.length === 3) {
+          if (
+            HighLow(arrayChunk[2]).type == "odd" ||
+            HighLow(arrayChunk[2]).type == "even" ||
+            HighLow(arrayChunk[2]).type == "zero"
+          ) {
+            if (HighLow(value).type == "even" || HighLow(value).type == "odd") {
+              temp = {
+                type: "newSet",
+                value: value,
+              };
+            }
+          }
+        }
+      });
+
+      if (temp.type == "newSet") {
+        OO.push([value]);
+      } else if (temp.type == "current") {
+        OO[OO.length - 1].push(temp.value);
+      } else if (temp.type == "closeNdOpenNewSet") {
+        OO[OO.length - 1].push(temp.value);
+        OO.push([value]);
+      }
+
+      return OO;
+    }
+  };
+  const B1CloseBR = (prevOddEven: any, value: any) => {
+    let OO: any = prevOddEven;
+    if (!OO.length) {
+      if (BlackRed(value).type == "even" || BlackRed(value).type == "odd") {
+        OO.push([value]);
+      }
+      return OO;
+    } else {
+      let temp: any = {
+        type: undefined,
+        value: undefined,
+        index: undefined,
+      };
+
+      let lastSubArray = [OO[OO.length - 1]];
+      lastSubArray.map((arrayChunk, index) => {
+        if (arrayChunk.length === 1) {
+          temp = {
+            type: "current",
+            value: value,
+            index: index,
+          };
+        }
+
+        if (arrayChunk.length === 2) {
+          if (BlackRed(value).type == "zero") {
+            temp = {
+              type: "current",
+              value: value,
+            };
+          } else {
+            if (BlackRed(arrayChunk[1]).type == "zero") {
+              if (
+                BlackRed(value).type == "even" ||
+                BlackRed(value).type == "odd"
+              ) {
+                temp = {
+                  type: "newSet",
+                  value: value,
+                };
+              }
+            } else if (
+              BlackRed(arrayChunk[0]).type == "odd" &&
+              BlackRed(arrayChunk[1]).type == "odd"
+            ) {
+              temp = {
+                type: "newSet",
+                value: value,
+              };
+            } else if (
+              BlackRed(arrayChunk[0]).type == "even" &&
+              BlackRed(arrayChunk[1]).type == "even"
+            ) {
+              temp = {
+                type: "newSet",
+                value: value,
+              };
+            } else if (
+              BlackRed(arrayChunk[1]).type == "even" &&
+              BlackRed(value).type == "even"
+            ) {
+              temp = {
+                type: "closeNdOpenNewSet",
+                value: value,
+              };
+            } else if (
+              BlackRed(arrayChunk[1]).type == "odd" &&
+              BlackRed(value).type == "odd"
+            ) {
+              temp = {
+                type: "closeNdOpenNewSet",
+                value: value,
+              };
+            } else if (
+              BlackRed(arrayChunk[1]).type == "even" ||
+              BlackRed(arrayChunk[1]).type == "odd"
+            ) {
+              temp = {
+                type: "current",
+                value: value,
+              };
+            }
+          }
+        }
+
+        if (arrayChunk.length === 3) {
+          if (
+            BlackRed(arrayChunk[2]).type == "odd" ||
+            BlackRed(arrayChunk[2]).type == "even" ||
+            BlackRed(arrayChunk[2]).type == "zero"
+          ) {
+            if (
+              BlackRed(value).type == "even" ||
+              BlackRed(value).type == "odd"
+            ) {
+              temp = {
+                type: "newSet",
+                value: value,
+              };
+            }
+          }
+        }
+      });
+
+      if (temp.type == "newSet") {
+        OO.push([value]);
+      } else if (temp.type == "current") {
+        OO[OO.length - 1].push(temp.value);
+      } else if (temp.type == "closeNdOpenNewSet") {
+        OO[OO.length - 1].push(temp.value);
+        OO.push([value]);
+      }
+
+      return OO;
+    }
+  };
   return {
     oddEven,
     evenOdd,
@@ -972,6 +1251,9 @@ const useAlg = () => {
     oddEvenOddClose,
     evenOddEvenClose,
     B1Close,
+    B1CloseHL,
+    B1CloseBR,
+    HighLow,
   };
 };
 

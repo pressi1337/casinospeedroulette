@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from "react";
 import BlockInput from "./Forms/BlockInput";
+import useAlg from "@/hooks/useAlg";
 
 export default function Card({
   title = "",
@@ -12,6 +13,7 @@ export default function Card({
   openBoxLimit = 0,
 }) {
   const [clientRecord, setClientRecord] = useState(record);
+  const { HighLow } = useAlg();
 
   useEffect(() => {
     setClientRecord(record);
@@ -392,6 +394,10 @@ export default function Card({
         return "bg-green-300";
       }
 
+      if (values[0] % 2 == 1 && values[1] % 2 == 0 && values[2] % 2 == 1) {
+        return "bg-green-300";
+      }
+
       return "bg-red-300";
     }
     return "bg-stone-300";
@@ -406,6 +412,10 @@ export default function Card({
     }
     if (values.length == 3) {
       if (values[0] % 2 == 0 && values[1] % 2 == 0 && values[2] % 2 == 1) {
+        return "bg-green-300";
+      }
+
+      if (values[0] % 2 == 0 && values[1] % 2 == 1 && values[2] % 2 == 0) {
         return "bg-green-300";
       }
 
@@ -431,6 +441,45 @@ export default function Card({
         return "bg-green-300";
       }
       if (values[0] % 2 == 0 && values[1] % 2 == 1 && values[2] % 2 == 0) {
+        return "bg-green-300";
+      }
+
+      return "bg-red-300";
+    }
+    return "bg-stone-300";
+  };
+
+  const B1HL = (values: any) => {
+    if (values.length == 1) {
+      return "bg-stone-300";
+    }
+    if (values.length == 2) {
+      if (
+        HighLow(values[0]).type_c == "even" &&
+        HighLow(values[1]).type_c == "even"
+      ) {
+        return "bg-green-300";
+      }
+      if (
+        HighLow(values[0]).type_c == "odd" &&
+        HighLow(values[1]).type_c == "odd"
+      ) {
+        return "bg-green-300";
+      }
+    }
+    if (values.length == 3) {
+      if (
+        HighLow(values[0]).type_c == "odd" &&
+        HighLow(values[1]).type_c == "even" &&
+        HighLow(values[2]).type_c == "odd"
+      ) {
+        return "bg-green-300";
+      }
+      if (
+        HighLow(values[0]).type_c == "even" &&
+        HighLow(values[1]).type_c == "odd" &&
+        HighLow(values[2]).type_c == "even"
+      ) {
         return "bg-green-300";
       }
 
@@ -501,6 +550,10 @@ export default function Card({
 
     if (type === "b1") {
       return B1(values);
+    }
+
+    if (type === "b1hl") {
+      return B1HL(values);
     }
 
     return "bg-stone-300";
