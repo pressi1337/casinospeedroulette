@@ -11,6 +11,15 @@ const useAlg = () => {
   const [oddEven, setOddEven] = useState<any>([]);
   const [evenOdd, setEvenOdd] = useState<any>([]);
 
+  const showTypeDiffer = (value: any) => {
+    if (value == 0) {
+      return "0";
+    }
+    if (RedNumber.includes(parseInt(value))) {
+      return "R";
+    }
+    return "B";
+  };
   const oddOrEven = (value: any) => {
     if (value == 0) {
       return {
@@ -57,7 +66,7 @@ const useAlg = () => {
         value,
         type_c: "even",
       };
-    } else if (value >= 18) {
+    } else if (value <= 18) {
       return {
         type: "even",
         type_2: "low",
@@ -1254,6 +1263,7 @@ const useAlg = () => {
     B1CloseHL,
     B1CloseBR,
     HighLow,
+    showTypeDiffer,
   };
 };
 

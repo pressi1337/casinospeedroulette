@@ -11,9 +11,10 @@ export default function Card({
   handleUndo = () => {},
   conditionCheckShow = false,
   openBoxLimit = 0,
+  displayType = "number",
 }) {
   const [clientRecord, setClientRecord] = useState(record);
-  const { HighLow } = useAlg();
+  const { HighLow, showTypeDiffer } = useAlg();
 
   useEffect(() => {
     setClientRecord(record);
@@ -487,6 +488,46 @@ export default function Card({
     }
     return "bg-stone-300";
   };
+
+  const B1BR = (values: any) => {
+    if (values.length == 1) {
+      return "bg-stone-300";
+    }
+    if (values.length == 2) {
+      if (
+        showTypeDiffer(values[0]) == "R" &&
+        showTypeDiffer(values[1]) == "R"
+      ) {
+        return "bg-green-300";
+      }
+      if (
+        showTypeDiffer(values[0]) == "B" &&
+        showTypeDiffer(values[1]) == "B"
+      ) {
+        return "bg-green-300";
+      }
+      return "bg-red-300";
+    }
+    if (values.length == 3) {
+      if (
+        showTypeDiffer(values[0]) == "R" &&
+        showTypeDiffer(values[1]) == "B" &&
+        showTypeDiffer(values[2]) == "R"
+      ) {
+        return "bg-green-300";
+      }
+      if (
+        showTypeDiffer(values[0]) == "B" &&
+        showTypeDiffer(values[1]) == "R" &&
+        showTypeDiffer(values[2]) == "B"
+      ) {
+        return "bg-green-300";
+      }
+
+      return "bg-red-300";
+    }
+    return "bg-stone-300";
+  };
   const COLOR_PATTERN = (type: any, values: any) => {
     if (type === "oddEven") {
       return OddEvenType(values);
@@ -555,6 +596,9 @@ export default function Card({
     if (type === "b1hl") {
       return B1HL(values);
     }
+    if (type === "b1br") {
+      return B1BR(values);
+    }
 
     return "bg-stone-300";
   };
@@ -581,7 +625,11 @@ export default function Card({
                         </p>
                         {item.map((val: any, inx: number) => (
                           <BlockInput
-                            val={val}
+                            val={
+                              displayType === "number"
+                                ? val
+                                : showTypeDiffer(val)
+                            }
                             key={`value-${index}-${inx}`}
                             index={inx}
                           />
@@ -604,7 +652,9 @@ export default function Card({
                     </p>
                     {item.map((val: any, inx: number) => (
                       <BlockInput
-                        val={val}
+                        val={
+                          displayType === "number" ? val : showTypeDiffer(val)
+                        }
                         key={`value-${index}-${inx}`}
                         index={inx}
                       />

@@ -184,7 +184,7 @@ export default function Home() {
       <main className="flex-1 overflow-y-auto p-6">
         <div className="grid gap-1 sm:grid-cols-2 lg:grid-cols-7 xl:grid-cols-7">
           {/* v4 */}
-          <div className="h-[calc(60vh-5rem)] overflow-y-auto border border-gray-300 rounded shadow p-4">
+          <div className="h-[calc(50vh-5rem)] overflow-y-auto border border-gray-300 rounded shadow p-4">
             <Card
               title={"ODD-ODD4"}
               record={OO4}
@@ -195,7 +195,7 @@ export default function Home() {
             />
             <div ref={OO4ContainerRef} className="h-1 w-full bg-transparent" />
           </div>
-          <div className="h-[calc(60vh-5rem)] overflow-y-auto border border-gray-300 rounded shadow p-4">
+          <div className="h-[calc(50vh-5rem)] overflow-y-auto border border-gray-300 rounded shadow p-4">
             <Card
               title={"OEOC"}
               record={OEOC}
@@ -207,7 +207,7 @@ export default function Home() {
             <div ref={OEOCContainerRef} className="h-1 w-full bg-transparent" />
           </div>
 
-          <div className="h-[calc(60vh-5rem)] overflow-y-auto border border-gray-300 rounded shadow p-4">
+          <div className="h-[calc(50vh-5rem)] overflow-y-auto border border-gray-300 rounded shadow p-4">
             <Card
               title={"OD-OD-OD"}
               record={OOO4}
@@ -224,7 +224,7 @@ export default function Home() {
             />
           </div>
 
-          <div className="h-[calc(60vh-5rem)] overflow-y-auto border border-gray-300 rounded shadow p-4">
+          <div className="h-[calc(50vh-5rem)] overflow-y-auto border border-gray-300 rounded shadow p-4">
             <Card
               title={"EV-EV4"}
               record={EE4}
@@ -235,7 +235,7 @@ export default function Home() {
             />
             <div ref={EE4ContainerRef} className="h-1 w-full bg-transparent" />
           </div>
-          <div className="h-[calc(60vh-5rem)] overflow-y-auto border border-gray-300 rounded shadow p-4">
+          <div className="h-[calc(50vh-5rem)] overflow-y-auto border border-gray-300 rounded shadow p-4">
             <Card
               title={"EOEC"}
               record={EOEC}
@@ -247,7 +247,7 @@ export default function Home() {
             <div ref={EOECContainerRef} className="h-1 w-full bg-transparent" />
           </div>
 
-          <div className="h-[calc(60vh-5rem)] overflow-y-auto border border-gray-300 rounded shadow p-4">
+          <div className="h-[calc(50vh-5rem)] overflow-y-auto border border-gray-300 rounded shadow p-4">
             <Card
               title={"EV-EV-EV"}
               record={EEE4}
@@ -264,7 +264,7 @@ export default function Home() {
             />
           </div>
 
-          <div className="h-[calc(60vh-5rem)] overflow-y-auto border border-gray-300 rounded shadow p-4">
+          <div className="h-[calc(50vh-5rem)] overflow-y-auto border border-gray-300 rounded shadow p-4">
             <Card
               title={"ODD-EV4"}
               record={OO4}
@@ -279,7 +279,7 @@ export default function Home() {
             />
           </div>
 
-          <div className="h-[calc(60vh-5rem)] overflow-y-auto border border-gray-300 rounded shadow p-4">
+          <div className="h-[calc(50vh-5rem)] overflow-y-auto border border-gray-300 rounded shadow p-4">
             <Card
               title={"EV-ODD4"}
               record={EE4}
@@ -294,7 +294,7 @@ export default function Home() {
             />
           </div>
 
-          <div className="h-[calc(60vh-5rem)] overflow-y-auto border border-gray-300 rounded shadow p-4">
+          <div className="h-[calc(50vh-5rem)] overflow-y-auto border border-gray-300 rounded shadow p-4">
             <Card
               title={"B1"}
               record={B1}
@@ -305,7 +305,7 @@ export default function Home() {
             />
             <div ref={B1ContainerRef} className="h-1 w-full bg-transparent" />
           </div>
-          <div className="h-[calc(60vh-5rem)] overflow-y-auto border border-gray-300 rounded shadow p-4">
+          <div className="h-[calc(50vh-5rem)] overflow-y-auto border border-gray-300 rounded shadow p-4">
             <Card
               title={"B1HL"}
               record={B1HL}
@@ -316,18 +316,19 @@ export default function Home() {
             />
             <div ref={B1HLContainerRef} className="h-1 w-full bg-transparent" />
           </div>
-          <div className="h-[calc(60vh-5rem)] overflow-y-auto border border-gray-300 rounded shadow p-4">
+          <div className="h-[calc(50vh-5rem)] overflow-y-auto border border-gray-300 rounded shadow p-4">
             <Card
               title={"B1BR"}
               record={B1BR}
-              type="b1"
+              type="b1br"
+              displayType="colorType"
               handleUndo={() => {
                 undoOptionOE(B1BR, setB1BR);
               }}
             />
             <div ref={B1BRContainerRef} className="h-1 w-full bg-transparent" />
           </div>
-          <div className="h-[calc(60vh-5rem)] overflow-y-auto border border-gray-300 rounded shadow p-4">
+          <div className="h-[calc(50vh-5rem)] overflow-y-auto border border-gray-300 rounded shadow p-4">
             <Card
               title={"ODD-EVEN1"}
               record={OE}
@@ -339,7 +340,7 @@ export default function Home() {
             <div ref={OEContainerRef} className="h-1 w-full bg-transparent" />
           </div>
 
-          <div className="h-[calc(60vh-5rem)] overflow-y-auto border border-gray-300 rounded shadow p-4">
+          <div className="h-[calc(50vh-5rem)] overflow-y-auto border border-gray-300 rounded shadow p-4">
             <Card
               title={"STD-OE"}
               record={NOE}
@@ -350,7 +351,7 @@ export default function Home() {
             />
             <div ref={NOEContainerRef} className="h-1 w-full bg-transparent" />
           </div>
-          <div className="h-[calc(60vh-5rem)] overflow-y-auto border border-gray-300 rounded shadow p-4">
+          <div className="h-[calc(50vh-5rem)] overflow-y-auto border border-gray-300 rounded shadow p-4">
             <Card
               title={"SAN"}
               record={SAN}
