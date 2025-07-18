@@ -450,6 +450,37 @@ export default function Card({
     return "bg-stone-300";
   };
 
+  const B2 = (values: any) => {
+    if (values.length == 1) {
+      return "bg-stone-300";
+    }
+    if (values.length == 2) {
+      if (values[0] % 2 == 0 && values[1] % 2 == 1) {
+        return "bg-green-300";
+      }
+      if (values[0] % 2 == 1 && values[1] % 2 == 0) {
+        return "bg-green-300";
+      }
+    }
+    if (values.length == 3) {
+      if (values[0] % 2 == 1 && values[1] == 0 && values[2] % 2 == 0) {
+        return "bg-green-300";
+      }
+      if (values[0] % 2 == 0 && values[1] == 0 && values[2] % 2 == 1) {
+        return "bg-green-300";
+      }
+      if (values[0] == 0 && values[1] % 2 == 0 && values[2] % 2 == 1) {
+        return "bg-green-300";
+      }
+      if (values[0] == 0 && values[1] % 2 == 1 && values[2] % 2 == 0) {
+        return "bg-green-300";
+      }
+
+      return "bg-red-300";
+    }
+    return "bg-stone-300";
+  };
+
   const B1HL = (values: any) => {
     if (values.length == 1) {
       return "bg-stone-300";
@@ -591,6 +622,10 @@ export default function Card({
 
     if (type === "b1") {
       return B1(values);
+    }
+
+    if (type === "b2") {
+      return B2(values);
     }
 
     if (type === "b1hl") {

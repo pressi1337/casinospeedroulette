@@ -21,6 +21,7 @@ export default function Home() {
   const OEOCContainerRef = useRef<HTMLDivElement>(null);
   const EOECContainerRef = useRef<HTMLDivElement>(null);
   const B1ContainerRef = useRef<HTMLDivElement>(null);
+  const B2ContainerRef = useRef<HTMLDivElement>(null);
   const OEContainerRef = useRef<HTMLDivElement>(null);
   const SANContainerRef = useRef<HTMLDivElement>(null);
   const NOEContainerRef = useRef<HTMLDivElement>(null);
@@ -44,6 +45,7 @@ export default function Home() {
     oddEvenPattern,
     normalOEPattern,
     sanPattern,
+    B2Close,
   } = useAlg();
   const [OO, setOO] = useState([]);
   const [EE, setEE] = useState([]);
@@ -54,6 +56,7 @@ export default function Home() {
   const [OEOC, setOEOC] = useState([]);
   const [EOEC, setEOEC] = useState([]);
   const [B1, setB1] = useState([]);
+  const [B2, setB2] = useState([]);
   const [B1HL, setB1HL] = useState([]);
   const [B1BR, setB1BR] = useState([]);
   const [OE, setOE] = useState([]);
@@ -75,6 +78,7 @@ export default function Home() {
           OEOC: JSON.stringify(OEOC),
           EOEC: JSON.stringify(EOEC),
           B1: JSON.stringify(B1),
+          B2: JSON.stringify(B2),
           B1HL: JSON.stringify(B1HL),
           B1BR: JSON.stringify(B1BR),
           OE: JSON.stringify(OE),
@@ -93,6 +97,7 @@ export default function Home() {
       setEOEC(evenOddEvenClose(EOEC, val));
       setOE(oddEvenPattern(OE, val));
       setB1(B1Close(B1, val));
+      setB2(B2Close(B2, val));
       setB1HL(B1CloseHL(B1HL, val));
       setB1BR(B1CloseBR(B1BR, val));
       setNOE(normalOEPattern(NOE, val));
@@ -129,6 +134,7 @@ export default function Home() {
         setOEOC((prv) => JSON.parse(lastState.OEOC));
         setEOEC((prv) => JSON.parse(lastState.EOEC));
         setB1((prv) => JSON.parse(lastState.B1));
+        setB2((prv) => JSON.parse(lastState.B2));
         setOE((prv) => JSON.parse(lastState.OE));
         setNOE((prv) => JSON.parse(lastState.NOE));
         setSAN((prv) => JSON.parse(lastState.SAN));
@@ -143,6 +149,7 @@ export default function Home() {
         setEEE4((prv) => []);
         setOEOC((prv) => []);
         setB1((prv) => []);
+        setB2((prv) => []);
         setB1HL((prv) => []);
         setB1BR((prv) => []);
         setOE((prv) => []);
@@ -165,6 +172,7 @@ export default function Home() {
     OEOCContainerRef.current?.scrollIntoView({ behavior: "smooth" });
     EOECContainerRef.current?.scrollIntoView({ behavior: "smooth" });
     B1ContainerRef.current?.scrollIntoView({ behavior: "smooth" });
+    B2ContainerRef.current?.scrollIntoView({ behavior: "smooth" });
     B1HLContainerRef.current?.scrollIntoView({ behavior: "smooth" });
     B1BRContainerRef.current?.scrollIntoView({ behavior: "smooth" });
     SANContainerRef.current?.scrollIntoView({ behavior: "smooth" });
@@ -246,24 +254,6 @@ export default function Home() {
             />
             <div ref={EOECContainerRef} className="h-1 w-full bg-transparent" />
           </div>
-
-          <div className="h-[calc(50vh-5rem)] overflow-y-auto border border-gray-300 rounded shadow p-4">
-            <Card
-              title={"EV-EV-EV"}
-              record={EEE4}
-              type="evevevv4"
-              conditionCheckShow={true}
-              openBoxLimit={2}
-              handleUndo={() => {
-                undoOptionOE(EEE4, setEEE4);
-              }}
-            />
-            <div
-              ref={EEE4dupContainerRef}
-              className="h-1 w-full bg-transparent"
-            />
-          </div>
-
           <div className="h-[calc(50vh-5rem)] overflow-y-auto border border-gray-300 rounded shadow p-4">
             <Card
               title={"ODD-EV4"}
@@ -338,6 +328,17 @@ export default function Home() {
               }}
             />
             <div ref={OEContainerRef} className="h-1 w-full bg-transparent" />
+          </div>
+          <div className="h-[calc(50vh-5rem)] overflow-y-auto border border-gray-300 rounded shadow p-4">
+            <Card
+              title={"B2"}
+              record={B2}
+              type="b2"
+              handleUndo={() => {
+                undoOptionOE(B2, setB2);
+              }}
+            />
+            <div ref={B2ContainerRef} className="h-1 w-full bg-transparent" />
           </div>
 
           <div className="h-[calc(50vh-5rem)] overflow-y-auto border border-gray-300 rounded shadow p-4">
