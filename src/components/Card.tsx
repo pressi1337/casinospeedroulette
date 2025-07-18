@@ -471,6 +471,10 @@ export default function Card({
         return "bg-green-300";
       } else if (values[0] == 0 && values[1] % 2 == 1 && values[2] % 2 == 0) {
         return "bg-green-300";
+      } else if (values[0] % 2 == 1 && values[1] % 2 == 1 && values[2] == 0) {
+        return "bg-red-300";
+      } else if (values[0] % 2 == 0 && values[1] % 2 == 0 && values[2] == 0) {
+        return "bg-red-300";
       } else if (
         values[0] % 2 == 1 &&
         values[1] % 2 == 1 &&
