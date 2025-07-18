@@ -465,14 +465,23 @@ export default function Card({
     if (values.length == 3) {
       if (values[0] % 2 == 1 && values[1] == 0 && values[2] % 2 == 0) {
         return "bg-green-300";
-      }
-      if (values[0] % 2 == 0 && values[1] == 0 && values[2] % 2 == 1) {
+      } else if (values[0] % 2 == 0 && values[1] == 0 && values[2] % 2 == 1) {
         return "bg-green-300";
-      }
-      if (values[0] == 0 && values[1] % 2 == 0 && values[2] % 2 == 1) {
+      } else if (values[0] == 0 && values[1] % 2 == 0 && values[2] % 2 == 1) {
         return "bg-green-300";
-      }
-      if (values[0] == 0 && values[1] % 2 == 1 && values[2] % 2 == 0) {
+      } else if (values[0] == 0 && values[1] % 2 == 1 && values[2] % 2 == 0) {
+        return "bg-green-300";
+      } else if (
+        values[0] % 2 == 1 &&
+        values[1] % 2 == 1 &&
+        values[2] % 2 == 0
+      ) {
+        return "bg-green-300";
+      } else if (
+        values[0] % 2 == 0 &&
+        values[1] % 2 == 0 &&
+        values[2] % 2 == 1
+      ) {
         return "bg-green-300";
       }
 
@@ -520,6 +529,62 @@ export default function Card({
     return "bg-stone-300";
   };
 
+  const B2HL = (values: any) => {
+    if (values.length == 1) {
+      return "bg-stone-300";
+    }
+    if (values.length == 2) {
+      if (
+        HighLow(values[0]).type_c == "even" &&
+        HighLow(values[1]).type_c == "odd"
+      ) {
+        return "bg-green-300";
+      }
+      if (
+        HighLow(values[0]).type_c == "odd" &&
+        HighLow(values[1]).type_c == "even"
+      ) {
+        return "bg-green-300";
+      }
+    }
+    if (values.length == 3) {
+      if (
+        HighLow(values[0]).type_c == "odd" &&
+        HighLow(values[1]).type_c == "zero" &&
+        HighLow(values[2]).type_c == "even"
+      ) {
+        return "bg-green-300";
+      } else if (
+        HighLow(values[0]).type_c == "zero" &&
+        HighLow(values[1]).type_c == "odd" &&
+        HighLow(values[2]).type_c == "even"
+      ) {
+        return "bg-green-300";
+      } else if (
+        HighLow(values[0]).type_c == "even" &&
+        HighLow(values[1]).type_c == "zero" &&
+        HighLow(values[2]).type_c == "odd"
+      ) {
+        return "bg-green-300";
+      } else if (
+        HighLow(values[0]).type_c == "odd" &&
+        HighLow(values[1]).type_c == "odd" &&
+        HighLow(values[2]).type_c == "even"
+      ) {
+        return "bg-green-300";
+      } else if (
+        HighLow(values[0]).type_c == "even" &&
+        HighLow(values[1]).type_c == "even" &&
+        HighLow(values[2]).type_c == "odd"
+      ) {
+        return "bg-green-300";
+      }
+
+      return "bg-red-300";
+    }
+    return "bg-stone-300";
+  };
+
   const B1BR = (values: any) => {
     if (values.length == 1) {
       return "bg-stone-300";
@@ -549,6 +614,73 @@ export default function Card({
       }
       if (
         showTypeDiffer(values[0]) == "B" &&
+        showTypeDiffer(values[1]) == "R" &&
+        showTypeDiffer(values[2]) == "B"
+      ) {
+        return "bg-green-300";
+      }
+
+      return "bg-red-300";
+    }
+    return "bg-stone-300";
+  };
+  const B2BR = (values: any) => {
+    if (values.length == 1) {
+      return "bg-stone-300";
+    }
+    if (values.length == 2) {
+      if (
+        showTypeDiffer(values[0]) == "R" &&
+        showTypeDiffer(values[1]) == "B"
+      ) {
+        return "bg-green-300";
+      }
+      if (
+        showTypeDiffer(values[0]) == "B" &&
+        showTypeDiffer(values[1]) == "R"
+      ) {
+        return "bg-green-300";
+      }
+      return "bg-red-300";
+    }
+    if (values.length == 3) {
+      if (
+        showTypeDiffer(values[0]) == "R" &&
+        showTypeDiffer(values[1]) == "0" &&
+        showTypeDiffer(values[2]) == "B"
+      ) {
+        return "bg-green-300";
+      }
+      if (
+        showTypeDiffer(values[0]) == "B" &&
+        showTypeDiffer(values[1]) == "0" &&
+        showTypeDiffer(values[2]) == "R"
+      ) {
+        return "bg-green-300";
+      }
+      if (
+        showTypeDiffer(values[0]) == "R" &&
+        showTypeDiffer(values[1]) == "R" &&
+        showTypeDiffer(values[2]) == "B"
+      ) {
+        return "bg-green-300";
+      }
+      if (
+        showTypeDiffer(values[0]) == "B" &&
+        showTypeDiffer(values[1]) == "B" &&
+        showTypeDiffer(values[2]) == "R"
+      ) {
+        return "bg-green-300";
+      }
+      if (
+        showTypeDiffer(values[0]) == "0" &&
+        showTypeDiffer(values[1]) == "B" &&
+        showTypeDiffer(values[2]) == "R"
+      ) {
+        return "bg-green-300";
+      }
+      if (
+        showTypeDiffer(values[0]) == "0" &&
         showTypeDiffer(values[1]) == "R" &&
         showTypeDiffer(values[2]) == "B"
       ) {
@@ -631,8 +763,14 @@ export default function Card({
     if (type === "b1hl") {
       return B1HL(values);
     }
+    if (type === "b2hl") {
+      return B2HL(values);
+    }
     if (type === "b1br") {
       return B1BR(values);
+    }
+    if (type === "b2br") {
+      return B2BR(values);
     }
 
     return "bg-stone-300";

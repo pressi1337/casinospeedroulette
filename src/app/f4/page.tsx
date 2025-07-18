@@ -26,7 +26,9 @@ export default function Home() {
   const SANContainerRef = useRef<HTMLDivElement>(null);
   const NOEContainerRef = useRef<HTMLDivElement>(null);
   const B1HLContainerRef = useRef<HTMLDivElement>(null);
+  const B2HLContainerRef = useRef<HTMLDivElement>(null);
   const B1BRContainerRef = useRef<HTMLDivElement>(null);
+  const B2BRContainerRef = useRef<HTMLDivElement>(null);
 
   const [history, setHistory] = useState<any>([]);
   const [val, setVal] = useState("");
@@ -46,6 +48,8 @@ export default function Home() {
     normalOEPattern,
     sanPattern,
     B2Close,
+    B2CloseHL,
+    B2CloseBR,
   } = useAlg();
   const [OO, setOO] = useState([]);
   const [EE, setEE] = useState([]);
@@ -59,6 +63,8 @@ export default function Home() {
   const [B2, setB2] = useState([]);
   const [B1HL, setB1HL] = useState([]);
   const [B1BR, setB1BR] = useState([]);
+  const [B2HL, setB2HL] = useState([]);
+  const [B2BR, setB2BR] = useState([]);
   const [OE, setOE] = useState([]);
   const [NOE, setNOE] = useState([]);
   const [SAN, setSAN] = useState([]);
@@ -81,6 +87,8 @@ export default function Home() {
           B2: JSON.stringify(B2),
           B1HL: JSON.stringify(B1HL),
           B1BR: JSON.stringify(B1BR),
+          B2HL: JSON.stringify(B2HL),
+          B2BR: JSON.stringify(B2BR),
           OE: JSON.stringify(OE),
           NOE: JSON.stringify(NOE),
           SAN: JSON.stringify(SAN),
@@ -100,6 +108,8 @@ export default function Home() {
       setB2(B2Close(B2, val));
       setB1HL(B1CloseHL(B1HL, val));
       setB1BR(B1CloseBR(B1BR, val));
+      setB2HL(B2CloseHL(B2HL, val));
+      setB2BR(B2CloseBR(B2BR, val));
       setNOE(normalOEPattern(NOE, val));
       setSAN(sanPattern(SAN, val));
       setVal("");
@@ -140,6 +150,8 @@ export default function Home() {
         setSAN((prv) => JSON.parse(lastState.SAN));
         setB1HL((prv) => JSON.parse(lastState.B1HL));
         setB1BR((prv) => JSON.parse(lastState.B1BR));
+        setB2HL((prv) => JSON.parse(lastState.B2HL));
+        setB2BR((prv) => JSON.parse(lastState.B2BR));
       } else {
         setOO((prv) => []);
         setEE((prv) => []);
@@ -152,6 +164,8 @@ export default function Home() {
         setB2((prv) => []);
         setB1HL((prv) => []);
         setB1BR((prv) => []);
+        setB2HL((prv) => []);
+        setB2BR((prv) => []);
         setOE((prv) => []);
         setNOE((prv) => []);
         setSAN((prv) => []);
@@ -175,6 +189,8 @@ export default function Home() {
     B2ContainerRef.current?.scrollIntoView({ behavior: "smooth" });
     B1HLContainerRef.current?.scrollIntoView({ behavior: "smooth" });
     B1BRContainerRef.current?.scrollIntoView({ behavior: "smooth" });
+    B2HLContainerRef.current?.scrollIntoView({ behavior: "smooth" });
+    B2BRContainerRef.current?.scrollIntoView({ behavior: "smooth" });
     SANContainerRef.current?.scrollIntoView({ behavior: "smooth" });
     NOEContainerRef.current?.scrollIntoView({ behavior: "smooth" });
     OEContainerRef.current?.scrollIntoView({ behavior: "smooth" });
@@ -215,7 +231,7 @@ export default function Home() {
             <div ref={OEOCContainerRef} className="h-1 w-full bg-transparent" />
           </div>
 
-          <div className="h-[calc(50vh-5rem)] overflow-y-auto border border-gray-300 rounded shadow p-4">
+          {/* <div className="h-[calc(50vh-5rem)] overflow-y-auto border border-gray-300 rounded shadow p-4">
             <Card
               title={"OD-OD-OD"}
               record={OOO4}
@@ -230,7 +246,7 @@ export default function Home() {
               ref={OOO4dupContainerRef}
               className="h-1 w-full bg-transparent"
             />
-          </div>
+          </div> */}
 
           <div className="h-[calc(50vh-5rem)] overflow-y-auto border border-gray-300 rounded shadow p-4">
             <Card
@@ -254,7 +270,7 @@ export default function Home() {
             />
             <div ref={EOECContainerRef} className="h-1 w-full bg-transparent" />
           </div>
-          <div className="h-[calc(50vh-5rem)] overflow-y-auto border border-gray-300 rounded shadow p-4">
+          {/* <div className="h-[calc(50vh-5rem)] overflow-y-auto border border-gray-300 rounded shadow p-4">
             <Card
               title={"ODD-EV4"}
               record={OO4}
@@ -267,7 +283,7 @@ export default function Home() {
               ref={OO4dupContainerRef}
               className="h-1 w-full bg-transparent"
             />
-          </div>
+          </div> */}
 
           <div className="h-[calc(50vh-5rem)] overflow-y-auto border border-gray-300 rounded shadow p-4">
             <Card
@@ -282,6 +298,28 @@ export default function Home() {
               ref={EE4dupContainerRef}
               className="h-1 w-full bg-transparent"
             />
+          </div>
+          <div className="h-[calc(50vh-5rem)] overflow-y-auto border border-gray-300 rounded shadow p-4">
+            <Card
+              title={"STD-OE"}
+              record={NOE}
+              type="normalOddEven"
+              handleUndo={() => {
+                undoOptionOE(NOE, setNOE);
+              }}
+            />
+            <div ref={NOEContainerRef} className="h-1 w-full bg-transparent" />
+          </div>
+          <div className="h-[calc(50vh-5rem)] overflow-y-auto border border-gray-300 rounded shadow p-4">
+            <Card
+              title={"SAN"}
+              record={SAN}
+              type="SAN"
+              handleUndo={() => {
+                undoOptionOE(SAN, setNOE);
+              }}
+            />
+            <div ref={SANContainerRef} className="h-1 w-full bg-transparent" />
           </div>
 
           <div className="h-[calc(50vh-5rem)] overflow-y-auto border border-gray-300 rounded shadow p-4">
@@ -343,25 +381,26 @@ export default function Home() {
 
           <div className="h-[calc(50vh-5rem)] overflow-y-auto border border-gray-300 rounded shadow p-4">
             <Card
-              title={"STD-OE"}
-              record={NOE}
-              type="normalOddEven"
+              title={"B2HL"}
+              record={B2HL}
+              type="b2hl"
               handleUndo={() => {
-                undoOptionOE(NOE, setNOE);
+                undoOptionOE(B2HL, setB2HL);
               }}
             />
-            <div ref={NOEContainerRef} className="h-1 w-full bg-transparent" />
+            <div ref={B2HLContainerRef} className="h-1 w-full bg-transparent" />
           </div>
           <div className="h-[calc(50vh-5rem)] overflow-y-auto border border-gray-300 rounded shadow p-4">
             <Card
-              title={"SAN"}
-              record={SAN}
-              type="SAN"
+              title={"B2BR"}
+              record={B2BR}
+              type="b2br"
+              displayType="colorType"
               handleUndo={() => {
-                undoOptionOE(SAN, setNOE);
+                undoOptionOE(B2BR, setB2BR);
               }}
             />
-            <div ref={SANContainerRef} className="h-1 w-full bg-transparent" />
+            <div ref={B2BRContainerRef} className="h-1 w-full bg-transparent" />
           </div>
         </div>
       </main>

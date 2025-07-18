@@ -1373,6 +1373,281 @@ const useAlg = () => {
       return OO;
     }
   };
+  const B2CloseHL = (prevOddEven: any, value: any) => {
+    let OO: any = prevOddEven;
+    if (!OO.length) {
+      OO.push([value]);
+      return OO;
+    } else {
+      let temp: any = {
+        type: undefined,
+        value: undefined,
+        index: undefined,
+      };
+
+      let lastSubArray = [OO[OO.length - 1]];
+      lastSubArray.map((arrayChunk, index) => {
+        if (arrayChunk.length === 1) {
+          temp = {
+            type: "current",
+            value: value,
+            index: index,
+          };
+        }
+
+        if (arrayChunk.length === 2) {
+          if (
+            HighLow(arrayChunk[0]).type == "odd" &&
+            HighLow(arrayChunk[1]).type == "even"
+          ) {
+            if (HighLow(value).type == "odd") {
+              temp = {
+                type: "newSet",
+                value: value,
+              };
+            }
+          } else if (
+            HighLow(arrayChunk[0]).type == "even" &&
+            HighLow(arrayChunk[1]).type == "odd"
+          ) {
+            if (HighLow(value).type == "even") {
+              temp = {
+                type: "newSet",
+                value: value,
+              };
+            }
+          } else {
+            temp = {
+              type: "current",
+              value: value,
+              index: index,
+            };
+          }
+        }
+
+        if (arrayChunk.length === 3) {
+          if (
+            HighLow(arrayChunk[0]).type == "zero" &&
+            HighLow(arrayChunk[1]).type == "zero" &&
+            HighLow(arrayChunk[2]).type == "zero"
+          ) {
+            temp = {
+              type: "newSet",
+              value: value,
+            };
+          } else if (
+            HighLow(arrayChunk[1]).type == "zero" &&
+            HighLow(arrayChunk[2]).type == "zero"
+          ) {
+            if (HighLow(arrayChunk[0]).type == "odd") {
+              if (HighLow(value).type == "even") {
+                temp = {
+                  type: "newSet",
+                  value: value,
+                };
+              }
+            } else if (HighLow(arrayChunk[0]).type == "even") {
+              if (HighLow(value).type == "odd") {
+                temp = {
+                  type: "newSet",
+                  value: value,
+                };
+              }
+            }
+          } else if (HighLow(arrayChunk[2]).type == "zero") {
+            if (HighLow(arrayChunk[0]).type == "odd") {
+              if (
+                HighLow(value).type == "even" ||
+                HighLow(value).type == "zero"
+              ) {
+                temp = {
+                  type: "newSet",
+                  value: value,
+                };
+              }
+            } else if (HighLow(arrayChunk[0]).type == "even") {
+              if (
+                HighLow(value).type == "odd" ||
+                HighLow(value).type == "zero"
+              ) {
+                temp = {
+                  type: "newSet",
+                  value: value,
+                };
+              }
+            }
+          } else if (HighLow(arrayChunk[2]).type == "odd") {
+            if (
+              HighLow(value).type == "even" ||
+              HighLow(value).type == "zero"
+            ) {
+              temp = {
+                type: "newSet",
+                value: value,
+              };
+            }
+          } else if (HighLow(arrayChunk[2]).type == "even") {
+            if (HighLow(value).type == "odd" || HighLow(value).type == "zero") {
+              temp = {
+                type: "newSet",
+                value: value,
+              };
+            }
+          }
+        }
+      });
+
+      if (temp.type == "newSet") {
+        OO.push([value]);
+      } else if (temp.type == "current") {
+        OO[OO.length - 1].push(temp.value);
+      } else if (temp.type == "closeNdOpenNewSet") {
+        OO[OO.length - 1].push(temp.value);
+        OO.push([value]);
+      }
+
+      return OO;
+    }
+  };
+
+  const B2CloseBR = (prevOddEven: any, value: any) => {
+    let OO: any = prevOddEven;
+    if (!OO.length) {
+      OO.push([value]);
+      return OO;
+    } else {
+      let temp: any = {
+        type: undefined,
+        value: undefined,
+        index: undefined,
+      };
+
+      let lastSubArray = [OO[OO.length - 1]];
+      lastSubArray.map((arrayChunk, index) => {
+        if (arrayChunk.length === 1) {
+          temp = {
+            type: "current",
+            value: value,
+            index: index,
+          };
+        }
+
+        if (arrayChunk.length === 2) {
+          if (
+            BlackRed(arrayChunk[0]).type == "odd" &&
+            BlackRed(arrayChunk[1]).type == "even"
+          ) {
+            if (BlackRed(value).type == "odd") {
+              temp = {
+                type: "newSet",
+                value: value,
+              };
+            }
+          } else if (
+            BlackRed(arrayChunk[0]).type == "even" &&
+            BlackRed(arrayChunk[1]).type == "odd"
+          ) {
+            if (BlackRed(value).type == "even") {
+              temp = {
+                type: "newSet",
+                value: value,
+              };
+            }
+          } else {
+            temp = {
+              type: "current",
+              value: value,
+              index: index,
+            };
+          }
+        }
+
+        if (arrayChunk.length === 3) {
+          if (
+            BlackRed(arrayChunk[0]).type == "zero" &&
+            BlackRed(arrayChunk[1]).type == "zero" &&
+            BlackRed(arrayChunk[2]).type == "zero"
+          ) {
+            temp = {
+              type: "newSet",
+              value: value,
+            };
+          } else if (
+            BlackRed(arrayChunk[1]).type == "zero" &&
+            BlackRed(arrayChunk[2]).type == "zero"
+          ) {
+            if (BlackRed(arrayChunk[0]).type == "odd") {
+              if (BlackRed(value).type == "even") {
+                temp = {
+                  type: "newSet",
+                  value: value,
+                };
+              }
+            } else if (BlackRed(arrayChunk[0]).type == "even") {
+              if (BlackRed(value).type == "odd") {
+                temp = {
+                  type: "newSet",
+                  value: value,
+                };
+              }
+            }
+          } else if (BlackRed(arrayChunk[2]).type == "zero") {
+            if (BlackRed(arrayChunk[0]).type == "odd") {
+              if (
+                BlackRed(value).type == "even" ||
+                BlackRed(value).type == "zero"
+              ) {
+                temp = {
+                  type: "newSet",
+                  value: value,
+                };
+              }
+            } else if (BlackRed(arrayChunk[0]).type == "even") {
+              if (
+                BlackRed(value).type == "odd" ||
+                BlackRed(value).type == "zero"
+              ) {
+                temp = {
+                  type: "newSet",
+                  value: value,
+                };
+              }
+            }
+          } else if (BlackRed(arrayChunk[2]).type == "odd") {
+            if (
+              BlackRed(value).type == "even" ||
+              BlackRed(value).type == "zero"
+            ) {
+              temp = {
+                type: "newSet",
+                value: value,
+              };
+            }
+          } else if (BlackRed(arrayChunk[2]).type == "even") {
+            if (
+              BlackRed(value).type == "odd" ||
+              BlackRed(value).type == "zero"
+            ) {
+              temp = {
+                type: "newSet",
+                value: value,
+              };
+            }
+          }
+        }
+      });
+      if (temp.type == "newSet") {
+        OO.push([value]);
+      } else if (temp.type == "current") {
+        OO[OO.length - 1].push(temp.value);
+      } else if (temp.type == "closeNdOpenNewSet") {
+        OO[OO.length - 1].push(temp.value);
+        OO.push([value]);
+      }
+
+      return OO;
+    }
+  };
   return {
     oddEven,
     evenOdd,
@@ -1394,6 +1669,8 @@ const useAlg = () => {
     HighLow,
     showTypeDiffer,
     B2Close,
+    B2CloseHL,
+    B2CloseBR,
   };
 };
 
