@@ -576,12 +576,12 @@ export default function Card({
       ) {
         return "bg-green-300";
       } else if (
-        HighLow(values[0]).type_c == "zero" &&
+        HighLow(values[0]).type == "zero" &&
         HighLow(values[1]).type_c == "even"
       ) {
         return "bg-green-300";
       } else if (
-        HighLow(values[0]).type_c == "zero" &&
+        HighLow(values[0]).type == "zero" &&
         HighLow(values[1]).type_c == "odd"
       ) {
         return "bg-green-300";
@@ -589,20 +589,20 @@ export default function Card({
     }
     if (values.length == 3) {
       if (
-        HighLow(values[0]).type_c == "zero" &&
+        HighLow(values[0]).type == "zero" &&
         HighLow(values[1]).type_c == "odd" &&
         HighLow(values[2]).type_c == "even"
       ) {
         return "bg-green-300";
       } else if (
-        HighLow(values[0]).type_c == "zero" &&
+        HighLow(values[0]).type == "zero" &&
         HighLow(values[1]).type_c == "even" &&
         HighLow(values[2]).type_c == "odd"
       ) {
         return "bg-green-300";
       } else if (
         HighLow(values[0]).type_c == "odd" &&
-        HighLow(values[1]).type_c == "zero" &&
+        HighLow(values[1]).type == "zero" &&
         HighLow(values[2]).type_c == "even"
       ) {
         return "bg-green-300";
@@ -614,7 +614,7 @@ export default function Card({
         return "bg-green-300";
       } else if (
         HighLow(values[0]).type_c == "even" &&
-        HighLow(values[1]).type_c == "zero" &&
+        HighLow(values[1]).type == "zero" &&
         HighLow(values[2]).type_c == "odd"
       ) {
         return "bg-green-300";
