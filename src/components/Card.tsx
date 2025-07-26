@@ -480,38 +480,38 @@ export default function Card({
     if (values.length == 3) {
       if (
         oddOrEven(values[0]).type == "zero" &&
-        oddOrEven(values[0]).type == "odd" &&
-        oddOrEven(values[0]).type == "even"
+        oddOrEven(values[1]).type == "odd" &&
+        oddOrEven(values[2]).type == "even"
       ) {
         return "bg-green-300";
       } else if (
         oddOrEven(values[0]).type == "zero" &&
-        oddOrEven(values[0]).type == "even" &&
-        oddOrEven(values[0]).type == "odd"
+        oddOrEven(values[1]).type == "even" &&
+        oddOrEven(values[2]).type == "odd"
       ) {
         return "bg-green-300";
       } else if (
         oddOrEven(values[0]).type == "odd" &&
-        oddOrEven(values[0]).type == "zero" &&
-        oddOrEven(values[0]).type == "even"
+        oddOrEven(values[1]).type == "zero" &&
+        oddOrEven(values[2]).type == "even"
       ) {
         return "bg-green-300";
       } else if (
         oddOrEven(values[0]).type == "odd" &&
-        oddOrEven(values[0]).type == "odd" &&
-        oddOrEven(values[0]).type == "even"
+        oddOrEven(values[1]).type == "odd" &&
+        oddOrEven(values[2]).type == "even"
       ) {
         return "bg-green-300";
       } else if (
         oddOrEven(values[0]).type == "even" &&
-        oddOrEven(values[0]).type == "zero" &&
-        oddOrEven(values[0]).type == "odd"
+        oddOrEven(values[1]).type == "zero" &&
+        oddOrEven(values[2]).type == "odd"
       ) {
         return "bg-green-300";
       } else if (
         oddOrEven(values[0]).type == "even" &&
-        oddOrEven(values[0]).type == "even" &&
-        oddOrEven(values[0]).type == "odd"
+        oddOrEven(values[1]).type == "even" &&
+        oddOrEven(values[2]).type == "odd"
       ) {
         return "bg-green-300";
       }
@@ -590,38 +590,38 @@ export default function Card({
     if (values.length == 3) {
       if (
         HighLow(values[0]).type_c == "zero" &&
-        HighLow(values[0]).type_c == "odd" &&
-        HighLow(values[0]).type_c == "even"
+        HighLow(values[1]).type_c == "odd" &&
+        HighLow(values[2]).type_c == "even"
       ) {
         return "bg-green-300";
       } else if (
         HighLow(values[0]).type_c == "zero" &&
-        HighLow(values[0]).type_c == "even" &&
-        HighLow(values[0]).type_c == "odd"
+        HighLow(values[1]).type_c == "even" &&
+        HighLow(values[2]).type_c == "odd"
       ) {
         return "bg-green-300";
       } else if (
         HighLow(values[0]).type_c == "odd" &&
-        HighLow(values[0]).type_c == "zero" &&
-        HighLow(values[0]).type_c == "even"
+        HighLow(values[1]).type_c == "zero" &&
+        HighLow(values[2]).type_c == "even"
       ) {
         return "bg-green-300";
       } else if (
         HighLow(values[0]).type_c == "odd" &&
-        HighLow(values[0]).type_c == "odd" &&
-        HighLow(values[0]).type_c == "even"
+        HighLow(values[1]).type_c == "odd" &&
+        HighLow(values[2]).type_c == "even"
       ) {
         return "bg-green-300";
       } else if (
         HighLow(values[0]).type_c == "even" &&
-        HighLow(values[0]).type_c == "zero" &&
-        HighLow(values[0]).type_c == "odd"
+        HighLow(values[1]).type_c == "zero" &&
+        HighLow(values[2]).type_c == "odd"
       ) {
         return "bg-green-300";
       } else if (
         HighLow(values[0]).type_c == "even" &&
-        HighLow(values[0]).type_c == "even" &&
-        HighLow(values[0]).type_c == "odd"
+        HighLow(values[1]).type_c == "even" &&
+        HighLow(values[2]).type_c == "odd"
       ) {
         return "bg-green-300";
       }
