@@ -676,12 +676,12 @@ export default function Card({
     }
     if (values.length == 2) {
       if (
-        showTypeDiffer(values[0]) == "R" &&
+        showTypeDiffer(values[0]) == "B" &&
         showTypeDiffer(values[1]) == "R"
       ) {
         return "bg-green-300";
       } else if (
-        showTypeDiffer(values[0]) == "B" &&
+        showTypeDiffer(values[0]) == "R" &&
         showTypeDiffer(values[1]) == "B"
       ) {
         return "bg-green-300";
