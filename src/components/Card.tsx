@@ -14,7 +14,7 @@ export default function Card({
   displayType = "number",
 }) {
   const [clientRecord, setClientRecord] = useState(record);
-  const { HighLow, showTypeDiffer } = useAlg();
+  const { HighLow, showTypeDiffer, oddOrEven } = useAlg();
 
   useEffect(() => {
     setClientRecord(record);
@@ -455,36 +455,63 @@ export default function Card({
       return "bg-stone-300";
     }
     if (values.length == 2) {
-      if (values[0] % 2 == 0 && values[1] % 2 == 1) {
+      if (
+        oddOrEven(values[0]).type == "zero" &&
+        oddOrEven(values[1]).type == "odd"
+      ) {
         return "bg-green-300";
-      }
-      if (values[0] % 2 == 1 && values[1] % 2 == 0) {
+      } else if (
+        oddOrEven(values[0]).type == "zero" &&
+        oddOrEven(values[1]).type == "even"
+      ) {
+        return "bg-green-300";
+      } else if (
+        oddOrEven(values[0]).type == "odd" &&
+        oddOrEven(values[1]).type == "even"
+      ) {
+        return "bg-green-300";
+      } else if (
+        oddOrEven(values[0]).type == "even" &&
+        oddOrEven(values[1]).type == "odd"
+      ) {
         return "bg-green-300";
       }
     }
     if (values.length == 3) {
-      if (values[0] % 2 == 1 && values[1] == 0 && values[2] % 2 == 0) {
-        return "bg-green-300";
-      } else if (values[0] % 2 == 0 && values[1] == 0 && values[2] % 2 == 1) {
-        return "bg-green-300";
-      } else if (values[0] == 0 && values[1] % 2 == 0 && values[2] % 2 == 1) {
-        return "bg-green-300";
-      } else if (values[0] == 0 && values[1] % 2 == 1 && values[2] % 2 == 0) {
-        return "bg-green-300";
-      } else if (values[0] % 2 == 1 && values[1] % 2 == 1 && values[2] == 0) {
-        return "bg-red-300";
-      } else if (values[0] % 2 == 0 && values[1] % 2 == 0 && values[2] == 0) {
-        return "bg-red-300";
-      } else if (
-        values[0] % 2 == 1 &&
-        values[1] % 2 == 1 &&
-        values[2] % 2 == 0
+      if (
+        oddOrEven(values[0]).type == "zero" &&
+        oddOrEven(values[0]).type == "odd" &&
+        oddOrEven(values[0]).type == "even"
       ) {
         return "bg-green-300";
       } else if (
-        values[0] % 2 == 0 &&
-        values[1] % 2 == 0 &&
-        values[2] % 2 == 1
+        oddOrEven(values[0]).type == "zero" &&
+        oddOrEven(values[0]).type == "even" &&
+        oddOrEven(values[0]).type == "odd"
+      ) {
+        return "bg-green-300";
+      } else if (
+        oddOrEven(values[0]).type == "odd" &&
+        oddOrEven(values[0]).type == "zero" &&
+        oddOrEven(values[0]).type == "even"
+      ) {
+        return "bg-green-300";
+      } else if (
+        oddOrEven(values[0]).type == "odd" &&
+        oddOrEven(values[0]).type == "odd" &&
+        oddOrEven(values[0]).type == "even"
+      ) {
+        return "bg-green-300";
+      } else if (
+        oddOrEven(values[0]).type == "even" &&
+        oddOrEven(values[0]).type == "zero" &&
+        oddOrEven(values[0]).type == "odd"
+      ) {
+        return "bg-green-300";
+      } else if (
+        oddOrEven(values[0]).type == "even" &&
+        oddOrEven(values[0]).type == "even" &&
+        oddOrEven(values[0]).type == "odd"
       ) {
         return "bg-green-300";
       }
@@ -543,43 +570,58 @@ export default function Card({
         HighLow(values[1]).type_c == "odd"
       ) {
         return "bg-green-300";
-      }
-      if (
+      } else if (
         HighLow(values[0]).type_c == "odd" &&
         HighLow(values[1]).type_c == "even"
+      ) {
+        return "bg-green-300";
+      } else if (
+        HighLow(values[0]).type_c == "zero" &&
+        HighLow(values[1]).type_c == "even"
+      ) {
+        return "bg-green-300";
+      } else if (
+        HighLow(values[0]).type_c == "zero" &&
+        HighLow(values[1]).type_c == "odd"
       ) {
         return "bg-green-300";
       }
     }
     if (values.length == 3) {
       if (
+        HighLow(values[0]).type_c == "zero" &&
         HighLow(values[0]).type_c == "odd" &&
-        HighLow(values[1]).type_c == "zero" &&
-        HighLow(values[2]).type_c == "even"
+        HighLow(values[0]).type_c == "even"
       ) {
         return "bg-green-300";
       } else if (
         HighLow(values[0]).type_c == "zero" &&
-        HighLow(values[1]).type_c == "odd" &&
-        HighLow(values[2]).type_c == "even"
-      ) {
-        return "bg-green-300";
-      } else if (
         HighLow(values[0]).type_c == "even" &&
-        HighLow(values[1]).type_c == "zero" &&
-        HighLow(values[2]).type_c == "odd"
+        HighLow(values[0]).type_c == "odd"
       ) {
         return "bg-green-300";
       } else if (
         HighLow(values[0]).type_c == "odd" &&
-        HighLow(values[1]).type_c == "odd" &&
-        HighLow(values[2]).type_c == "even"
+        HighLow(values[0]).type_c == "zero" &&
+        HighLow(values[0]).type_c == "even"
+      ) {
+        return "bg-green-300";
+      } else if (
+        HighLow(values[0]).type_c == "odd" &&
+        HighLow(values[0]).type_c == "odd" &&
+        HighLow(values[0]).type_c == "even"
       ) {
         return "bg-green-300";
       } else if (
         HighLow(values[0]).type_c == "even" &&
-        HighLow(values[1]).type_c == "even" &&
-        HighLow(values[2]).type_c == "odd"
+        HighLow(values[0]).type_c == "zero" &&
+        HighLow(values[0]).type_c == "odd"
+      ) {
+        return "bg-green-300";
+      } else if (
+        HighLow(values[0]).type_c == "even" &&
+        HighLow(values[0]).type_c == "even" &&
+        HighLow(values[0]).type_c == "odd"
       ) {
         return "bg-green-300";
       }
@@ -635,12 +677,21 @@ export default function Card({
     if (values.length == 2) {
       if (
         showTypeDiffer(values[0]) == "R" &&
+        showTypeDiffer(values[1]) == "R"
+      ) {
+        return "bg-green-300";
+      } else if (
+        showTypeDiffer(values[0]) == "B" &&
         showTypeDiffer(values[1]) == "B"
       ) {
         return "bg-green-300";
-      }
-      if (
-        showTypeDiffer(values[0]) == "B" &&
+      } else if (
+        showTypeDiffer(values[0]) == "0" &&
+        showTypeDiffer(values[1]) == "B"
+      ) {
+        return "bg-green-300";
+      } else if (
+        showTypeDiffer(values[0]) == "0" &&
         showTypeDiffer(values[1]) == "R"
       ) {
         return "bg-green-300";
@@ -649,44 +700,39 @@ export default function Card({
     }
     if (values.length == 3) {
       if (
-        showTypeDiffer(values[0]) == "R" &&
-        showTypeDiffer(values[1]) == "0" &&
-        showTypeDiffer(values[2]) == "B"
-      ) {
-        return "bg-green-300";
-      }
-      if (
-        showTypeDiffer(values[0]) == "B" &&
-        showTypeDiffer(values[1]) == "0" &&
-        showTypeDiffer(values[2]) == "R"
-      ) {
-        return "bg-green-300";
-      }
-      if (
-        showTypeDiffer(values[0]) == "R" &&
+        showTypeDiffer(values[0]) == "0" &&
         showTypeDiffer(values[1]) == "R" &&
         showTypeDiffer(values[2]) == "B"
       ) {
         return "bg-green-300";
-      }
-      if (
-        showTypeDiffer(values[0]) == "B" &&
-        showTypeDiffer(values[1]) == "B" &&
-        showTypeDiffer(values[2]) == "R"
-      ) {
-        return "bg-green-300";
-      }
-      if (
+      } else if (
         showTypeDiffer(values[0]) == "0" &&
         showTypeDiffer(values[1]) == "B" &&
         showTypeDiffer(values[2]) == "R"
       ) {
         return "bg-green-300";
-      }
-      if (
-        showTypeDiffer(values[0]) == "0" &&
+      } else if (
+        showTypeDiffer(values[0]) == "R" &&
+        showTypeDiffer(values[1]) == "0" &&
+        showTypeDiffer(values[2]) == "B"
+      ) {
+        return "bg-green-300";
+      } else if (
+        showTypeDiffer(values[0]) == "B" &&
+        showTypeDiffer(values[1]) == "0" &&
+        showTypeDiffer(values[2]) == "R"
+      ) {
+        return "bg-green-300";
+      } else if (
+        showTypeDiffer(values[0]) == "R" &&
         showTypeDiffer(values[1]) == "R" &&
         showTypeDiffer(values[2]) == "B"
+      ) {
+        return "bg-green-300";
+      } else if (
+        showTypeDiffer(values[0]) == "B" &&
+        showTypeDiffer(values[1]) == "B" &&
+        showTypeDiffer(values[2]) == "R"
       ) {
         return "bg-green-300";
       }
