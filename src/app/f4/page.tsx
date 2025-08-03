@@ -29,6 +29,8 @@ export default function Home() {
   const B2HLContainerRef = useRef<HTMLDivElement>(null);
   const B1BRContainerRef = useRef<HTMLDivElement>(null);
   const B2BRContainerRef = useRef<HTMLDivElement>(null);
+  const DOContainerRef = useRef<HTMLDivElement>(null);
+  const COContainerRef = useRef<HTMLDivElement>(null);
 
   const [history, setHistory] = useState<any>([]);
   const [val, setVal] = useState("");
@@ -50,6 +52,8 @@ export default function Home() {
     B2Close,
     B2CloseHL,
     B2CloseBR,
+    nDoze,
+    nColumn,
   } = useAlg();
   const [OO, setOO] = useState([]);
   const [EE, setEE] = useState([]);
@@ -68,6 +72,8 @@ export default function Home() {
   const [OE, setOE] = useState([]);
   const [NOE, setNOE] = useState([]);
   const [SAN, setSAN] = useState([]);
+  const [DO, setDO] = useState([]);
+  const [CO, setCO] = useState([]);
 
   const valueEnter = (e: any) => {
     e.preventDefault();
@@ -92,6 +98,8 @@ export default function Home() {
           OE: JSON.stringify(OE),
           NOE: JSON.stringify(NOE),
           SAN: JSON.stringify(SAN),
+          DO: JSON.stringify(DO),
+          CO: JSON.stringify(CO),
         }, // Save current snapshot
       ]);
 
@@ -112,6 +120,8 @@ export default function Home() {
       setB2BR(B2CloseBR(B2BR, val));
       setNOE(normalOEPattern(NOE, val));
       setSAN(sanPattern(SAN, val));
+      setDO(nDoze(DO, val));
+      setCO(nColumn(CO, val));
       setVal("");
     }
   };
@@ -152,6 +162,8 @@ export default function Home() {
         setB1BR((prv) => JSON.parse(lastState.B1BR));
         setB2HL((prv) => JSON.parse(lastState.B2HL));
         setB2BR((prv) => JSON.parse(lastState.B2BR));
+        setDO((prv) => JSON.parse(lastState.DO));
+        setCO((prv) => JSON.parse(lastState.CO));
       } else {
         setOO((prv) => []);
         setEE((prv) => []);
@@ -169,6 +181,8 @@ export default function Home() {
         setOE((prv) => []);
         setNOE((prv) => []);
         setSAN((prv) => []);
+        setDO((prv) => []);
+        setCO((prv) => []);
       }
     }
   };
@@ -194,6 +208,8 @@ export default function Home() {
     SANContainerRef.current?.scrollIntoView({ behavior: "smooth" });
     NOEContainerRef.current?.scrollIntoView({ behavior: "smooth" });
     OEContainerRef.current?.scrollIntoView({ behavior: "smooth" });
+    DOContainerRef.current?.scrollIntoView({ behavior: "smooth" });
+    COContainerRef.current?.scrollIntoView({ behavior: "smooth" });
   }, [val]);
 
   return (
@@ -285,7 +301,7 @@ export default function Home() {
             />
           </div> */}
 
-          <div className="h-[calc(50vh-5rem)] overflow-y-auto border border-gray-300 rounded shadow p-4">
+          {/* <div className="h-[calc(50vh-5rem)] overflow-y-auto border border-gray-300 rounded shadow p-4">
             <Card
               title={"EV-ODD4"}
               record={EE4}
@@ -298,18 +314,30 @@ export default function Home() {
               ref={EE4dupContainerRef}
               className="h-1 w-full bg-transparent"
             />
+          </div> */}
+          <div className="h-[calc(50vh-5rem)] overflow-y-auto border border-gray-300 rounded shadow p-4">
+            <Card
+              title={"Dozen"}
+              record={DO}
+              type="dozen"
+              handleUndo={() => {
+                undoOptionOE(DO, setDO);
+              }}
+            />
+            <div ref={DOContainerRef} className="h-1 w-full bg-transparent" />
           </div>
           <div className="h-[calc(50vh-5rem)] overflow-y-auto border border-gray-300 rounded shadow p-4">
             <Card
-              title={"STD-OE"}
-              record={NOE}
-              type="normalOddEven"
+              title={"Column"}
+              record={CO}
+              type="column"
               handleUndo={() => {
-                undoOptionOE(NOE, setNOE);
+                undoOptionOE(CO, setDO);
               }}
             />
-            <div ref={NOEContainerRef} className="h-1 w-full bg-transparent" />
+            <div ref={COContainerRef} className="h-1 w-full bg-transparent" />
           </div>
+
           <div className="h-[calc(50vh-5rem)] overflow-y-auto border border-gray-300 rounded shadow p-4">
             <Card
               title={"SAN"}
@@ -320,6 +348,18 @@ export default function Home() {
               }}
             />
             <div ref={SANContainerRef} className="h-1 w-full bg-transparent" />
+          </div>
+
+          <div className="h-[calc(50vh-5rem)] overflow-y-auto border border-gray-300 rounded shadow p-4">
+            <Card
+              title={"STD-OE"}
+              record={NOE}
+              type="normalOddEven"
+              handleUndo={() => {
+                undoOptionOE(NOE, setNOE);
+              }}
+            />
+            <div ref={NOEContainerRef} className="h-1 w-full bg-transparent" />
           </div>
 
           <div className="h-[calc(50vh-5rem)] overflow-y-auto border border-gray-300 rounded shadow p-4">
@@ -356,7 +396,7 @@ export default function Home() {
             />
             <div ref={B1BRContainerRef} className="h-1 w-full bg-transparent" />
           </div>
-          <div className="h-[calc(50vh-5rem)] overflow-y-auto border border-gray-300 rounded shadow p-4">
+          {/* <div className="h-[calc(50vh-5rem)] overflow-y-auto border border-gray-300 rounded shadow p-4">
             <Card
               title={"ODD-EVEN1"}
               record={OE}
@@ -366,7 +406,7 @@ export default function Home() {
               }}
             />
             <div ref={OEContainerRef} className="h-1 w-full bg-transparent" />
-          </div>
+          </div> */}
           <div className="h-[calc(50vh-5rem)] overflow-y-auto border border-gray-300 rounded shadow p-4">
             <Card
               title={"B2"}

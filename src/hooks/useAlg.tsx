@@ -7,9 +7,41 @@ const BlackNumber = [
 const RedNumber = [
   1, 3, 5, 7, 9, 12, 14, 16, 18, 19, 21, 23, 25, 27, 30, 32, 34, 36,
 ];
+
+const D1 = [3, 6, 9, 12, 2, 5, 8, 11, 1, 4, 7, 10];
+const D2 = [15, 18, 21, 24, 14, 17, 20, 23, 13, 16, 19, 22];
+const D3 = [27, 30, 33, 36, 26, 29, 32, 35, 25, 28, 31, 34];
+const C1 = [3, 6, 9, 12, 15, 18, 21, 24, 27, 30, 33, 36];
+const C2 = [2, 5, 8, 11, 14, 17, 20, 23, 26, 29, 32, 35];
+const C3 = [1, 4, 7, 10, 13, 16, 19, 22, 25, 28, 31, 34];
+
 const useAlg = () => {
   const [oddEven, setOddEven] = useState<any>([]);
   const [evenOdd, setEvenOdd] = useState<any>([]);
+
+  const showDozen = (value: any) => {
+    if (value == 0) {
+      return "0";
+    } else if (D1.includes(parseInt(value))) {
+      return "D1";
+    } else if (D2.includes(parseInt(value))) {
+      return "D2";
+    } else {
+      return "D3";
+    }
+  };
+
+  const showColumn = (value: any) => {
+    if (value == 0) {
+      return "0";
+    } else if (C1.includes(parseInt(value))) {
+      return "C1";
+    } else if (C2.includes(parseInt(value))) {
+      return "C2";
+    } else {
+      return "D3";
+    }
+  };
 
   const showTypeDiffer = (value: any) => {
     if (value == 0) {
@@ -2098,6 +2130,146 @@ const useAlg = () => {
     }
   };
 
+  const nDoze = (prevOddEven: any, value: any) => {
+    let OO: any = prevOddEven;
+    if (!OO.length) {
+      if (showDozen(value) !== "0") {
+        OO.push([value]);
+      }
+      return OO;
+    } else {
+      let temp: any = {
+        type: undefined,
+        value: undefined,
+        index: undefined,
+      };
+
+      let lastSubArray = [OO[OO.length - 1]];
+      lastSubArray.map((arrayChunk, index) => {
+        if (arrayChunk.length === 1) {
+          temp = {
+            type: "current",
+            value: value,
+            index: index,
+          };
+        }
+
+        if (arrayChunk.length === 2) {
+          if (showDozen(arrayChunk[1]) == "0") {
+            if (showDozen(value) !== "0") {
+              temp = {
+                type: "newSet",
+                value: value,
+              };
+            }
+          } else if (showDozen(arrayChunk[0]) == showDozen(arrayChunk[1])) {
+            temp = {
+              type: "newSet",
+              value: value,
+            };
+          } else {
+            if (showDozen(value) !== "0") {
+              temp = {
+                type: "current",
+                value: value,
+                index: index,
+              };
+            }
+          }
+        }
+
+        if (arrayChunk.length === 3) {
+          if (showDozen(value) !== "0") {
+            temp = {
+              type: "newSet",
+              value: value,
+            };
+          }
+        }
+      });
+
+      if (temp.type == "newSet") {
+        OO.push([value]);
+      } else if (temp.type == "current") {
+        OO[OO.length - 1].push(temp.value);
+      } else if (temp.type == "closeNdOpenNewSet") {
+        OO[OO.length - 1].push(temp.value);
+        OO.push([value]);
+      }
+
+      return OO;
+    }
+  };
+  const nColumn = (prevOddEven: any, value: any) => {
+    let OO: any = prevOddEven;
+    if (!OO.length) {
+      if (showColumn(value) !== "0") {
+        OO.push([value]);
+      }
+      return OO;
+    } else {
+      let temp: any = {
+        type: undefined,
+        value: undefined,
+        index: undefined,
+      };
+
+      let lastSubArray = [OO[OO.length - 1]];
+      lastSubArray.map((arrayChunk, index) => {
+        if (arrayChunk.length === 1) {
+          temp = {
+            type: "current",
+            value: value,
+            index: index,
+          };
+        }
+
+        if (arrayChunk.length === 2) {
+          if (showColumn(arrayChunk[1]) == "0") {
+            if (showColumn(value) !== "0") {
+              temp = {
+                type: "newSet",
+                value: value,
+              };
+            }
+          } else if (showColumn(arrayChunk[0]) == showColumn(arrayChunk[1])) {
+            temp = {
+              type: "newSet",
+              value: value,
+            };
+          } else {
+            if (showColumn(value) !== "0") {
+              temp = {
+                type: "current",
+                value: value,
+                index: index,
+              };
+            }
+          }
+        }
+
+        if (arrayChunk.length === 3) {
+          if (showColumn(value) !== "0") {
+            temp = {
+              type: "newSet",
+              value: value,
+            };
+          }
+        }
+      });
+
+      if (temp.type == "newSet") {
+        OO.push([value]);
+      } else if (temp.type == "current") {
+        OO[OO.length - 1].push(temp.value);
+      } else if (temp.type == "closeNdOpenNewSet") {
+        OO[OO.length - 1].push(temp.value);
+        OO.push([value]);
+      }
+
+      return OO;
+    }
+  };
   return {
     oddOrEven,
     oddEven,
@@ -2122,6 +2294,10 @@ const useAlg = () => {
     B2Close,
     B2CloseHL,
     B2CloseBR,
+    nDoze,
+    nColumn,
+    showDozen,
+    showColumn,
   };
 };
 

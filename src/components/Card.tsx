@@ -14,7 +14,8 @@ export default function Card({
   displayType = "number",
 }) {
   const [clientRecord, setClientRecord] = useState(record);
-  const { HighLow, showTypeDiffer, oddOrEven } = useAlg();
+  const { HighLow, showTypeDiffer, oddOrEven, showColumn, showDozen } =
+    useAlg();
 
   useEffect(() => {
     setClientRecord(record);
@@ -741,6 +742,100 @@ export default function Card({
     }
     return "bg-stone-300";
   };
+
+  const Dozen = (values: any) => {
+    if (values.length == 1) {
+      return "bg-stone-300";
+    }
+    if (values.length == 2) {
+      if (showDozen(values[0]) == "0" || showDozen(values[1] == "0")) {
+        return "bg-red-300";
+      } else if (showDozen(values[0]) == showDozen(values[1])) {
+        return "bg-green-300";
+      } else {
+        return "bg-stone-300";
+      }
+    }
+    if (values.length == 3) {
+      if (
+        [
+          showDozen(values[0]),
+          showDozen(values[1]),
+          showDozen(values[2]),
+        ].includes("0")
+      ) {
+        return "bg-red-300";
+      } else if (
+        [
+          showDozen(values[0]),
+          showDozen(values[1]),
+          showDozen(values[2]),
+        ].filter((item) => item == "D1").length >= 2 ||
+        [
+          showDozen(values[0]),
+          showDozen(values[1]),
+          showDozen(values[2]),
+        ].filter((item) => item == "D2").length >= 2 ||
+        [
+          showDozen(values[0]),
+          showDozen(values[1]),
+          showDozen(values[2]),
+        ].filter((item) => item == "D3").length >= 2
+      ) {
+        return "bg-red-300";
+      } else {
+        return "bg-green-300";
+      }
+    }
+    return "bg-stone-300";
+  };
+  const Column = (values: any) => {
+    if (values.length == 1) {
+      return "bg-stone-300";
+    }
+    if (values.length == 2) {
+      if (showColumn(values[0]) == "0" || showColumn(values[1] == "0")) {
+        return "bg-red-300";
+      } else if (showColumn(values[0]) == showColumn(values[1])) {
+        return "bg-green-300";
+      } else {
+        return "bg-stone-300";
+      }
+    }
+    if (values.length == 3) {
+      if (
+        [
+          showColumn(values[0]),
+          showColumn(values[1]),
+          showColumn(values[2]),
+        ].includes("0")
+      ) {
+        return "bg-red-300";
+      } else if (
+        [
+          showColumn(values[0]),
+          showColumn(values[1]),
+          showColumn(values[2]),
+        ].filter((item) => item == "C1").length >= 2 ||
+        [
+          showColumn(values[0]),
+          showColumn(values[1]),
+          showColumn(values[2]),
+        ].filter((item) => item == "C2").length >= 2 ||
+        [
+          showColumn(values[0]),
+          showColumn(values[1]),
+          showColumn(values[2]),
+        ].filter((item) => item == "C3").length >= 2
+      ) {
+        return "bg-red-300";
+      } else {
+        return "bg-green-300";
+      }
+    }
+    return "bg-stone-300";
+  };
+
   const COLOR_PATTERN = (type: any, values: any) => {
     if (type === "oddEven") {
       return OddEvenType(values);
@@ -821,6 +916,12 @@ export default function Card({
     }
     if (type === "b2br") {
       return B2BR(values);
+    }
+    if (type === "dozen") {
+      return Dozen(values);
+    }
+    if (type === "column") {
+      return Column(values);
     }
 
     return "bg-stone-300";
