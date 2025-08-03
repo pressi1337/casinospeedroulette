@@ -748,7 +748,7 @@ export default function Card({
       return "bg-stone-300";
     }
     if (values.length == 2) {
-      if (showDozen(values[0]) == "0" || showDozen(values[1] == "0")) {
+      if (showDozen(values[0]) == "0" || showDozen(values[1]) == "0") {
         return "bg-red-300";
       } else if (showDozen(values[0]) == showDozen(values[1])) {
         return "bg-green-300";
@@ -782,9 +782,9 @@ export default function Card({
           showDozen(values[2]),
         ].filter((item) => item == "D3").length >= 2
       ) {
-        return "bg-red-300";
-      } else {
         return "bg-green-300";
+      } else {
+        return "bg-red-300";
       }
     }
     return "bg-stone-300";
@@ -794,7 +794,7 @@ export default function Card({
       return "bg-stone-300";
     }
     if (values.length == 2) {
-      if (showColumn(values[0]) == "0" || showColumn(values[1] == "0")) {
+      if (showColumn(values[0]) == "0" || showColumn(values[1]) == "0") {
         return "bg-red-300";
       } else if (showColumn(values[0]) == showColumn(values[1])) {
         return "bg-green-300";
@@ -828,9 +828,9 @@ export default function Card({
           showColumn(values[2]),
         ].filter((item) => item == "C3").length >= 2
       ) {
-        return "bg-red-300";
-      } else {
         return "bg-green-300";
+      } else {
+        return "bg-red-300";
       }
     }
     return "bg-stone-300";

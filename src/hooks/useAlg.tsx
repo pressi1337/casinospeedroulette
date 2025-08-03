@@ -2168,13 +2168,11 @@ const useAlg = () => {
               value: value,
             };
           } else {
-            if (showDozen(value) !== "0") {
-              temp = {
-                type: "current",
-                value: value,
-                index: index,
-              };
-            }
+            temp = {
+              type: "current",
+              value: value,
+              index: index,
+            };
           }
         }
 
@@ -2238,13 +2236,11 @@ const useAlg = () => {
               value: value,
             };
           } else {
-            if (showColumn(value) !== "0") {
-              temp = {
-                type: "current",
-                value: value,
-                index: index,
-              };
-            }
+            temp = {
+              type: "current",
+              value: value,
+              index: index,
+            };
           }
         }
 
